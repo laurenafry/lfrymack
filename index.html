@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wild & Made — Nature-Inspired Custom Art</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1c1a17;
+    --cream: #f5f0e8;
+    --sage: #7a8c6e;
+    --rust: #b85c38;
+    --clay: #c4956a;
+    --moss: #3d4f35;
+    --warm-white: #faf7f2;
+    --sand: #e8dfc8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background-color: var(--warm-white);
+    color: var(--ink);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--rust);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: multiply;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--rust);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.12s ease;
+    opacity: 0.6;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 3rem;
+    mix-blend-mode: multiply;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--moss);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 4rem 5rem;
+    position: relative; z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 5.5vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--moss);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .hero-sub {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--ink);
+    opacity: 0;
+    max-width: 400px;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.9s ease 0.7s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sage);
+    padding-bottom: 0.3rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.9s forwards;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .hero-cta:hover { color: var(--rust); border-color: var(--rust); }
+  .hero-cta::after { content: '→'; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.4s forwards;
+  }
+
+  .hero-illustration {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--sand) 0%, var(--sage) 40%, var(--moss) 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* SVG botanical illustration in hero */
+  .hero-svg { width: 85%; height: 85%; opacity: 0.9; }
+
+  .hero-tag {
+    position: absolute; bottom: 3rem; left: 3rem;
+    background: var(--cream);
+    padding: 1.2rem 1.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--moss);
+    border-left: 2px solid var(--rust);
+    max-width: 220px;
+    line-height: 1.5;
+  }
+
+  /* MARQUEE */
+  .marquee-strip {
+    background: var(--moss);
+    color: var(--cream);
+    padding: 1rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .marquee-inner span { margin: 0 2rem; opacity: 0.5; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ABOUT */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 80vh;
+  }
+
+  .about-visual {
+    background: var(--sand);
+    display: flex; align-items: center; justify-content: center;
+    padding: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 70%, var(--clay) 0%, transparent 60%);
+    opacity: 0.3;
+  }
+
+  .about-monogram {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18rem;
+    font-weight: 300;
+    color: var(--sage);
+    opacity: 0.18;
+    position: absolute;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .about-badge {
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: var(--moss);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    position: relative; z-index: 2;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(61,79,53,0.3);
+  }
+  .about-badge-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--cream);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  .about-badge-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clay);
+  }
+
+  .about-text {
+    padding: 6rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    background: var(--warm-white);
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--moss);
+    margin-bottom: 2rem;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #4a4540;
+    margin-bottom: 1.5rem;
+    max-width: 480px;
+  }
+
+  .about-stats {
+    display: flex; gap: 3rem;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--sand);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--rust);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  /* SERVICES */
+  .services {
+    background: var(--cream);
+    padding: 8rem 5rem;
+  }
+
+  .services-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 5rem;
+  }
+
+  .services-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    color: var(--moss);
+    line-height: 1.1;
+    max-width: 500px;
+  }
+
+  .services-header p {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #5a5450;
+    max-width: 300px;
+    text-align: right;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--sand);
+  }
+
+  .service-card {
+    background: var(--warm-white);
+    padding: 3rem 2.5rem;
+    position: relative;
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+  .service-card:hover { background: var(--moss); }
+  .service-card:hover .service-name,
+  .service-card:hover .service-desc { color: var(--cream); }
+  .service-card:hover .service-icon { opacity: 0.3; }
+  .service-card:hover .service-num { color: var(--clay); }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--sand);
+    position: absolute;
+    top: 1.5rem; right: 2rem;
+    line-height: 1;
+    transition: color 0.3s;
+  }
+
+  .service-icon {
+    font-size: 2rem; margin-bottom: 1.5rem;
+    display: block;
+    transition: opacity 0.3s;
+  }
+
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--moss);
+    margin-bottom: 0.8rem;
+    transition: color 0.3s;
+  }
+
+  .service-desc {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #6a6460;
+    transition: color 0.3s;
+  }
+
+  /* OUTLET COVERS FEATURE */
+  .feature {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    min-height: 70vh;
+    overflow: hidden;
+  }
+
+  .feature-text {
+    background: var(--moss);
+    padding: 7rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    color: var(--cream);
+  }
+
+  .feature-text .section-label { color: var(--clay); }
+
+  .feature-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 3.5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 2rem;
+    color: var(--cream);
+  }
+
+  .feature-text p {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: rgba(245,240,232,0.75);
+    max-width: 440px;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--clay);
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(196,149,106,0.3);
+  }
+
+  .feature-visual {
+    background: var(--sand);
+    display: flex; align-items: center; justify-content: center;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .outlet-demo {
+    width: 100%; max-width: 340px;
+    aspect-ratio: 1;
+    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .outlet-row {
+    display: flex; align-items: center; gap: 2rem;
+  }
+
+  .outlet-before, .outlet-after {
+    display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+  }
+
+  .outlet-plate {
+    width: 90px; height: 110px;
+    border-radius: 6px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 14px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+
+  .outlet-plate.plain {
+    background: #f0ede8;
+    border: 1px solid #ddd;
+  }
+
+  .outlet-plate.matched {
+    background: linear-gradient(135deg, #8b7355 0%, #a0856a 25%, #7a6548 50%, #9c8060 75%, #876b50 100%);
+  }
+  .outlet-plate.matched::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      48deg,
+      transparent, transparent 4px,
+      rgba(255,255,255,0.06) 4px, rgba(255,255,255,0.06) 5px
+    );
+    border-radius: 6px;
+  }
+
+  .outlet-hole {
+    width: 10px; height: 16px;
+    border-radius: 2px;
+    background: rgba(0,0,0,0.25);
+  }
+  .outlet-plate.plain .outlet-hole { background: rgba(0,0,0,0.2); }
+
+  .outlet-slot {
+    width: 22px; height: 7px;
+    border-radius: 2px;
+    background: rgba(0,0,0,0.25);
+  }
+
+  .outlet-pair { display: flex; gap: 8px; }
+
+  .plate-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  .arrow-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--clay);
+  }
+
+  /* PROCESS */
+  .process {
+    padding: 8rem 5rem;
+    background: var(--warm-white);
+  }
+
+  .process h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-weight: 300;
+    color: var(--moss);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .process-sub {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6a6460;
+    margin-bottom: 5rem;
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .process-step {
+    text-align: center;
+    position: relative;
+  }
+
+  .process-step:not(:last-child)::after {
+    content: '···';
+    position: absolute;
+    right: -1.5rem;
+    top: 1.8rem;
+    color: var(--clay);
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+  }
+
+  .step-num {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid var(--sage);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--moss);
+    font-style: italic;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--moss);
+    margin-bottom: 0.7rem;
+  }
+
+  .step-desc {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: #6a6460;
+  }
+
+  /* MEDIUMS */
+  .mediums {
+    background: var(--ink);
+    padding: 7rem 5rem;
+    text-align: center;
+  }
+
+  .mediums .section-label { color: var(--clay); margin-bottom: 1rem; }
+
+  .mediums h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 4rem;
+  }
+
+  .medium-tags {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 0.8rem;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+  }
+
+  .medium-tag {
+    padding: 0.6rem 1.4rem;
+    border: 1px solid rgba(122,140,110,0.4);
+    color: rgba(245,240,232,0.7);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    border-radius: 100px;
+    text-transform: capitalize;
+    transition: all 0.2s;
+  }
+  .medium-tag:hover {
+    background: var(--moss);
+    color: var(--cream);
+    border-color: var(--sage);
+  }
+
+  .mediums-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--clay);
+  }
+
+  /* COMMISSION CTA */
+  .commission {
+    background: var(--rust);
+    padding: 8rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .commission::before {
+    content: 'COMMISSION';
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.06);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .commission h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 5rem);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    position: relative;
+  }
+
+  .commission p {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.8);
+    line-height: 1.8;
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    position: relative;
+  }
+
+  .btn-main {
+    display: inline-block;
+    padding: 1.1rem 3rem;
+    background: var(--cream);
+    color: var(--rust);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    transition: background 0.25s, color 0.25s;
+  }
+  .btn-main:hover { background: var(--moss); color: var(--cream); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 4rem 5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--cream);
+    opacity: 0.9;
+  }
+
+  .footer-tagline {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: rgba(245,240,232,0.4);
+    margin-top: 0.3rem;
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--clay); }
+
+  .footer-copy {
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.25);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+
+  /* scroll reveals */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    .hero, .about, .feature { grid-template-columns: 1fr; }
+    .hero-right { min-height: 50vw; }
+    .hero-left { padding: 7rem 2rem 3rem; }
+    .about-visual { padding: 4rem 2rem; }
+    .about-text { padding: 4rem 2rem; }
+    .feature-text { padding: 5rem 2rem; }
+    .services { padding: 5rem 2rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .services-header { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+    .services-header p { text-align: left; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .process-step::after { display: none; }
+    .commission, .process, .mediums { padding: 5rem 2rem; }
+    footer { flex-direction: column; gap: 2rem; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Wild & Made</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#outlets">Blended Covers</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#commission">Commission</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Wildlife-Inspired Custom Art · Colorado</p>
+    <h1 class="hero-title">
+      Art rooted<br>in the <em>wild,</em><br>made for your<br>world.
+    </h1>
+    <p class="hero-sub">
+      Custom commissions in acrylic, watercolor, clay, embroidery, and more —
+      each piece inspired by the natural world and crafted to bring it into your home.
+    </p>
+    <a href="#commission" class="hero-cta">Start a commission</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-illustration">
+      <!-- Botanical SVG illustration -->
+      <svg class="hero-svg" viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background organic shapes -->
+        <ellipse cx="250" cy="300" rx="180" ry="220" fill="rgba(61,79,53,0.15)"/>
+        <!-- Main stem -->
+        <path d="M250 550 Q240 480 260 420 Q270 360 240 310 Q220 260 250 200 Q270 160 245 100" stroke="#3d4f35" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Large left leaf -->
+        <path d="M245 350 Q190 310 160 270 Q155 250 170 240 Q200 260 230 300 Q240 320 245 350Z" fill="#7a8c6e" opacity="0.7"/>
+        <path d="M245 350 Q200 340 170 310" stroke="#3d4f35" stroke-width="1" fill="none"/>
+        <!-- Large right leaf -->
+        <path d="M255 300 Q310 270 340 230 Q350 210 335 205 Q305 220 275 260 Q262 278 255 300Z" fill="#7a8c6e" opacity="0.85"/>
+        <path d="M255 300 Q305 285 335 255" stroke="#3d4f35" stroke-width="1" fill="none"/>
+        <!-- Mid left leaf -->
+        <path d="M248 420 Q195 395 175 365 Q170 350 182 345 Q210 365 235 395 Q244 410 248 420Z" fill="#5a7050" opacity="0.6"/>
+        <!-- Mid right leaf -->
+        <path d="M255 240 Q300 205 320 170 Q328 155 315 150 Q288 165 265 200 Q258 220 255 240Z" fill="#9aad88" opacity="0.75"/>
+        <!-- Small accent leaves -->
+        <path d="M247 190 Q220 165 215 140 Q214 130 222 128 Q235 145 245 170 Q248 182 247 190Z" fill="#7a8c6e" opacity="0.65"/>
+        <path d="M253 160 Q275 135 280 110 Q282 100 273 99 Q260 114 253 138 Q251 150 253 160Z" fill="#9aad88" opacity="0.7"/>
+        <!-- Flower/blossom top -->
+        <circle cx="245" cy="90" r="8" fill="#c4956a" opacity="0.9"/>
+        <circle cx="245" cy="90" r="4" fill="#b85c38" opacity="0.8"/>
+        <!-- Petal cluster -->
+        <ellipse cx="235" cy="76" rx="7" ry="12" fill="#c4956a" opacity="0.6" transform="rotate(-20 235 76)"/>
+        <ellipse cx="256" cy="78" rx="7" ry="12" fill="#c4956a" opacity="0.6" transform="rotate(20 256 78)"/>
+        <ellipse cx="244" cy="70" rx="6" ry="11" fill="#d4a57a" opacity="0.7" transform="rotate(-5 244 70)"/>
+        <!-- Small berries -->
+        <circle cx="165" cy="268" r="5" fill="#b85c38" opacity="0.7"/>
+        <circle cx="158" cy="278" r="4" fill="#b85c38" opacity="0.6"/>
+        <circle cx="172" cy="276" r="3.5" fill="#c4956a" opacity="0.8"/>
+        <!-- Ground element -->
+        <path d="M180 555 Q250 530 320 555" stroke="#3d4f35" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <!-- Roots suggestion -->
+        <path d="M250 550 Q235 565 220 580" stroke="#3d4f35" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
+        <path d="M250 550 Q262 570 278 585" stroke="#3d4f35" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
+        <path d="M250 550 Q248 572 245 590" stroke="#3d4f35" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
+        <!-- Scattered dots / seeds -->
+        <circle cx="310" cy="380" r="2.5" fill="#c4956a" opacity="0.5"/>
+        <circle cx="180" cy="340" r="2" fill="#c4956a" opacity="0.4"/>
+        <circle cx="320" cy="290" r="2" fill="#c4956a" opacity="0.5"/>
+        <circle cx="175" cy="440" r="1.5" fill="#7a8c6e" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="hero-tag">
+      "Every piece begins with the natural world."
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Paintings</span>·<span>Miniature Sculptures</span>·<span>Embroidery</span>·<span>Glass Etching</span>·<span>Woodworking</span>·<span>Vinyl</span>·<span>Graphic Design</span>·<span>Apparel</span>·<span>Stationery</span>·<span>Holiday Decor</span>·<span>Plant Stakes</span>·<span>Clay Sculpting</span>·<span>Bedazzling</span>·
+    <span>Paintings</span>·<span>Miniature Sculptures</span>·<span>Embroidery</span>·<span>Glass Etching</span>·<span>Woodworking</span>·<span>Vinyl</span>·<span>Graphic Design</span>·<span>Apparel</span>·<span>Stationery</span>·<span>Holiday Decor</span>·<span>Plant Stakes</span>·<span>Clay Sculpting</span>·<span>Bedazzling</span>·
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-monogram">W</div>
+    <div class="about-badge">
+      <div class="about-badge-title">Wildlife &<br>Conservation Biology</div>
+      <div class="about-badge-sub">CSU · Fort Collins, CO</div>
+    </div>
+  </div>
+  <div class="about-text">
+    <p class="section-label">About the Artist</p>
+    <h2>Where science<br>meets <em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--rust)">craft.</em></h2>
+    <p>
+      My art begins outdoors — in the field, in the forest, at the water's edge.
+      Studying wildlife and conservation biology at Colorado State University gave me
+      an intimate understanding of the natural world: the way light hits a feather,
+      how lichen grows across stone, the improbable colors of a Colorado meadow.
+    </p>
+    <p>
+      That knowledge is the foundation of everything I make. Whether I'm painting
+      a miniature portrait in watercolor or sculpting a tiny creature from clay,
+      nature is always the starting point.
+    </p>
+    <p>
+      I take commissions across a wide range of mediums and love collaborating with
+      people who want something truly one-of-a-kind.
+    </p>
+    <div class="about-stats">
+      <div>
+        <span class="stat-num">15+</span>
+        <span class="stat-label">Mediums & crafts</span>
+      </div>
+      <div>
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Custom possibilities</span>
+      </div>
+      <div>
+        <span class="stat-num">CO</span>
+        <span class="stat-label">Colorado-based</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <h2>What I<br><em style="font-family:'Cormorant Garamond',serif; font-style:italic">make</em> for you</h2>
+    <p>Every commission is a collaboration. Tell me what you're envisioning and we'll find the perfect medium to bring it to life.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <span class="service-icon">🎨</span>
+      <div class="service-name">Fine Art Paintings</div>
+      <p class="service-desc">Original works in acrylic and watercolor. Wildlife portraits, botanical studies, landscapes, and custom scenes — any size.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">02</span>
+      <span class="service-icon">🪨</span>
+      <div class="service-name">Miniature Sculptures</div>
+      <p class="service-desc">Tiny, intricate creatures and figures in hand-worked clay. Remarkably detailed at any scale.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">03</span>
+      <span class="service-icon">🪡</span>
+      <div class="service-name">Embroidery & Apparel</div>
+      <p class="service-desc">Custom embroidered pieces on clothing, accessories, and textiles. Wearable art with a natural touch.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">04</span>
+      <span class="service-icon">🌿</span>
+      <div class="service-name">Decor & Plant Stakes</div>
+      <p class="service-desc">Holiday decor, hand-painted plant stakes, and home accents that bring the outdoors inside.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">05</span>
+      <span class="service-icon">🪵</span>
+      <div class="service-name">Mixed Media & Wood</div>
+      <p class="service-desc">Glass etching, woodworking, vinyl, bedazzling — mixed-media commissions that push creative limits.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">06</span>
+      <span class="service-icon">✉️</span>
+      <div class="service-name">Stationery & Design</div>
+      <p class="service-desc">Custom stationery suites, greeting cards, and graphic design with a handcrafted, nature-inspired aesthetic.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUTLET COVERS FEATURE -->
+<section class="feature" id="outlets">
+  <div class="feature-text">
+    <p class="section-label">Signature Service</p>
+    <h2>Blended<br>Covers</h2>
+    <p>
+      Outlets and switch plates are the last thing most people think about —
+      which is exactly why they stand out. A bright white plate against a
+      hand-laid stone backsplash or a dramatic wallpapered wall can undo an
+      entire design scheme.
+    </p>
+    <p>
+      I paint each outlet or switch plate cover by hand to seamlessly match
+      your surface — tile, stone, wallpaper, wood, plaster, or paint — so
+      the hardware simply disappears into your design.
+    </p>
+    <p>
+      Custom painted outlet covers, switch plates, and panel covers for
+      kitchens, bathrooms, living spaces, and anywhere else you want the
+      beauty to go uninterrupted.
+    </p>
+    <div class="feature-tagline">"Where your wall doesn't stop."</div>
+  </div>
+  <div class="feature-visual">
+    <div class="outlet-demo">
+      <div class="outlet-row">
+        <div class="outlet-before">
+          <div class="outlet-plate plain">
+            <div class="outlet-pair">
+              <div class="outlet-hole"></div>
+              <div class="outlet-hole"></div>
+            </div>
+            <div class="outlet-slot"></div>
+          </div>
+          <span class="plate-label">Before</span>
+        </div>
+        <div class="arrow-label">→</div>
+        <div class="outlet-after">
+          <div class="outlet-plate matched">
+            <div class="outlet-pair">
+              <div class="outlet-hole"></div>
+              <div class="outlet-hole"></div>
+            </div>
+            <div class="outlet-slot"></div>
+          </div>
+          <span class="plate-label">Blended</span>
+        </div>
+      </div>
+      <p style="font-size:0.75rem; color:var(--moss); text-align:center; margin-top:1rem; font-style:italic; font-family:'Cormorant Garamond',serif; opacity:0.8;">Hand-painted to match your stone, tile,<br>wallpaper, or any surface.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <p class="section-label" style="text-align:center">How it works</p>
+  <h2>From idea to finished piece</h2>
+  <p class="process-sub">Every commission follows a simple, collaborative process.</p>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-num">1</div>
+      <div class="step-title">Reach Out</div>
+      <p class="step-desc">Tell me what you're imagining — even if it's just a feeling or a rough idea. I love a good challenge.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">2</div>
+      <div class="step-title">Consult</div>
+      <p class="step-desc">We chat about medium, size, timeline, and budget. I'll suggest approaches you might not have considered.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">3</div>
+      <div class="step-title">Create</div>
+      <p class="step-desc">I get to work. For larger pieces I'll share progress updates and welcome your input along the way.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">4</div>
+      <div class="step-title">Deliver</div>
+      <p class="step-desc">Your finished piece arrives ready to enjoy — packaged with care, with full satisfaction guaranteed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIUMS -->
+<section class="mediums" id="mediums">
+  <p class="section-label">Mediums & Crafts</p>
+  <h2>If you can dream it,<br>there's a medium for it.</h2>
+  <div class="medium-tags">
+    <span class="medium-tag">Acrylic painting</span>
+    <span class="medium-tag">Watercolor</span>
+    <span class="medium-tag">Miniature sculpting</span>
+    <span class="medium-tag">Clay</span>
+    <span class="medium-tag">Embroidery</span>
+    <span class="medium-tag">Graphic design</span>
+    <span class="medium-tag">Stationery</span>
+    <span class="medium-tag">Apparel</span>
+    <span class="medium-tag">Accessories</span>
+    <span class="medium-tag">Vinyl</span>
+    <span class="medium-tag">Glass etching</span>
+    <span class="medium-tag">Bedazzling</span>
+    <span class="medium-tag">Woodworking</span>
+    <span class="medium-tag">Holiday decor</span>
+    <span class="medium-tag">Plant stakes</span>
+    <span class="medium-tag">Mixed media</span>
+    <span class="medium-tag">Blended outlet covers</span>
+    <span class="medium-tag">+ much more</span>
+  </div>
+  <p class="mediums-note">Not sure what you need? Just ask — I'll figure it out.</p>
+</section>
+
+<!-- COMMISSION CTA -->
+<section class="commission" id="commission">
+  <h2>Let's make<br>something wild.</h2>
+  <p>Ready to commission a piece, ask a question, or just say hello?<br>I'd love to hear from you.</p>
+  <a href="mailto:hello@wildandmade.com" class="btn-main">Get in touch</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Wild & Made</div>
+    <div class="footer-tagline">Nature-inspired custom art · Colorado</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#outlets">Blended Covers</a></li>
+    <li><a href="#commission">Commission</a></li>
+    <li><a href="#">Instagram</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Wild & Made</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
