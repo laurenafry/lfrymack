@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery & Commissions — Lauren's Wildlife</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1c1a17;
+    --cream: #f5f0e8;
+    --sage: #7a8c6e;
+    --rust: #b85c38;
+    --clay: #c4956a;
+    --moss: #3d4f35;
+    --warm-white: #faf7f2;
+    --sand: #e8dfc8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background-color: var(--warm-white);
+    color: var(--ink);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor { width: 10px; height: 10px; background: var(--rust); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
+  .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--rust); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.12s ease; opacity: 0.6; }
+
+
+/* NAV BAR */
+.nav {
+  position: fixed;
+  top: 1.5rem;
+  left: 2rem;
+  right: 2rem;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+
+  background: rgba(61, 79, 53, 0.85);
+  backdrop-filter: blur(10px);
+
+  transition: all 0.3s ease;
+}
+
+.nav.scrolled {
+  background: rgba(61, 79, 53, 0.98);
+}
+
+/* LOGO */
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+/* LINKS */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  opacity: 0.85;
+  position: relative;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+/* UNDERLINE */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 1px;
+  background: var(--cream);
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* DROPDOWN */
+.dropdown {
+  position: relative;
+}
+
+.dropdown > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dropdown > a::after {
+  content: "⌄";
+  font-size: 0.8rem;
+  transform: translateY(-10px);
+  opacity: 0.7;
+}
+ 
+/* 🔥 HOVER BRIDGE FIX */
+.dropdown::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 12px; /* invisible buffer */
+}
+    
+/* DROPDOWN MENU */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+
+  background: rgba(61, 79, 53, 0.85);
+  backdrop-filter: blur(8px);
+
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+
+  list-style: none;
+  min-width: 170px;
+
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+
+  transition: all 0.25s ease;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-menu a {
+  font-size: 0.7rem;
+  color: var(--cream);
+}
+
+/* HAMBURGER */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.menu-toggle span {
+  width: 22px;
+  height: 2px;
+  background: var(--cream);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+
+    width: 220px;
+
+    flex-direction: column;
+    gap: 1rem;
+
+    background: rgba(61, 79, 53, 0.98);
+    backdrop-filter: blur(10px);
+
+    padding: 1rem;
+    border-radius: 12px;
+
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+
+    transition: all 0.25s ease;
+  }
+
+  .nav-links.active {
+    opacity: .85 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
+
+  /* Mobile dropdown always visible */
+  .dropdown-menu {
+    position: static;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    background: transparent;
+    padding-left: 1rem;
+  }
+}  
+  
+
+  
+  /* PAGE HEADER */
+  .page-header {
+    padding: 10rem 5rem 5rem;
+    text-align: center;
+    background: var(--cream);
+    border-bottom: 1px solid var(--sand);
+  }
+  .page-header .eyebrow { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--rust); margin-bottom: 1.2rem; }
+  .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5vw, 5rem); font-weight: 300; color: var(--moss); line-height: 1.1; }
+  .page-header p { font-size: 0.9rem; color: #6a6460; margin-top: 1.2rem; line-height: 1.8; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+  /* SECTION NAV */
+  .section-nav {
+    position: static; top: 62px; z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--sand);
+    display: flex; justify-content: center; gap: 0;
+  }
+  .section-nav a {
+    padding: 1.1rem 2.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.5;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .section-nav a:hover { opacity: 1; }
+  .section-nav a.active { opacity: 1; color: var(--rust); border-bottom-color: var(--rust); }
+
+  /* GALLERY SECTION */
+  .gallery-section { padding: 6rem 5rem; }
+  .gallery-section + .gallery-section { border-top: 1px solid var(--sand); }
+
+  .gallery-section-header { margin-bottom: 3rem; }
+  .gallery-section-header .label { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.8rem; }
+  .gallery-section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; color: var(--moss); }
+  .gallery-section-header p { font-size: 0.85rem; color: #6a6460; line-height: 1.7; max-width: 500px; margin-top: 0.6rem; }
+
+  /* GRID */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    background: var(--sand);
+    aspect-ratio: 4/3;
+    border-radius: 2px;
+  }
+
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .gallery-item:hover img { transform: scale(1.04); }
+
+  .gallery-item-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(28,26,23,0.7) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex; align-items: flex-end;
+    padding: 1.5rem;
+  }
+  .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+  .item-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); font-style: italic; }
+  .item-medium { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); margin-top: 0.2rem; }
+
+  /* Placeholder items */
+  .gallery-placeholder {
+    background: var(--sand);
+    aspect-ratio: 4/3;
+    border-radius: 2px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.8rem;
+    border: 2px dashed rgba(122,140,110,0.3);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .gallery-placeholder:hover { border-color: var(--sage); background: rgba(122,140,110,0.08); }
+  .placeholder-icon { font-size: 2rem; opacity: 0.3; }
+  .placeholder-text { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); opacity: 0.6; }
+
+  /* LIGHTBOX */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(28,26,23,0.95);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+
+  .lightbox-inner {
+    position: relative;
+    max-width: 85vw;
+    max-height: 85vh;
+    display: flex; flex-direction: column; align-items: center;
+    transform: scale(0.96);
+    transition: transform 0.3s;
+  }
+  .lightbox.open .lightbox-inner { transform: scale(1); }
+
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    border-radius: 2px;
+  }
+
+  .lightbox-caption {
+    margin-top: 1.2rem;
+    text-align: center;
+  }
+  .lightbox-caption .title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--cream); }
+  .lightbox-caption .medium { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-top: 0.3rem; }
+
+  .lightbox-close {
+    position: absolute; top: -3rem; right: 0;
+    background: none; border: none;
+    color: var(--cream); font-size: 1.5rem;
+    cursor: none; opacity: 0.7;
+    transition: opacity 0.2s;
+    line-height: 1;
+    padding: 0.5rem;
+  }
+  .lightbox-close:hover { opacity: 1; }
+
+  .lightbox-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: none; border: none;
+    color: var(--cream); font-size: 2rem;
+    cursor: none; opacity: 0.5;
+    transition: opacity 0.2s;
+    padding: 1rem;
+  }
+  .lightbox-nav:hover { opacity: 1; }
+  .lightbox-prev { left: -4rem; }
+  .lightbox-next { right: -4rem; }
+
+  /* WATERMARK overlay on lightbox */
+  .lightbox-watermark {
+    position: absolute;
+    inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+    opacity: 0.12;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: white;
+    letter-spacing: 0.3em;
+    transform: rotate(-30deg);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  /* COMMISSION FORM */
+  .commission-section {
+    background: var(--cream);
+    padding: 7rem 5rem;
+    border-top: 1px solid var(--sand);
+  }
+
+  .commission-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .commission-section .label { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--rust); margin-bottom: 1rem; }
+  .commission-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; color: var(--moss); margin-bottom: 0.8rem; }
+  .commission-section .intro { font-size: 0.9rem; color: #6a6460; line-height: 1.8; margin-bottom: 3.5rem; max-width: 520px; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .form-full { grid-column: 1 / -1; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--moss); }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 2px;
+    padding: 0.9rem 1.1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+    cursor: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--sage); }
+
+  .form-group textarea { resize: vertical; min-height: 130px; }
+
+  .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a8c6e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+
+  /* File upload */
+  .file-upload-area {
+    border: 2px dashed var(--sand);
+    border-radius: 2px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--warm-white);
+    position: relative;
+  }
+  .file-upload-area:hover { border-color: var(--sage); background: rgba(122,140,110,0.05); }
+  .file-upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .upload-text { font-size: 0.8rem; color: #6a6460; line-height: 1.6; }
+  .upload-text strong { color: var(--moss); }
+  .file-list { margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .file-chip { padding: 0.3rem 0.8rem; background: var(--moss); color: var(--cream); font-size: 0.7rem; border-radius: 100px; }
+
+  .form-note { font-size: 0.75rem; color: #8a8480; line-height: 1.7; margin-top: 0.5rem; font-style: italic; }
+
+  .btn-submit {
+    display: inline-block;
+    padding: 1.1rem 3.5rem;
+    background: var(--moss);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: background 0.25s;
+  }
+  .btn-submit:hover { background: var(--rust); }
+
+  /* Success message */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+  .form-success.show { display: block; }
+  .success-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+  .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--moss); margin-bottom: 1rem; }
+  .form-success p { font-size: 0.9rem; color: #6a6460; line-height: 1.8; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: var(--cream); padding: 3rem 5rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; }
+  .footer-back { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.5); text-decoration: none; transition: color 0.2s; }
+  .footer-back:hover { color: var(--clay); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+  
+<nav class="nav">
+  <a href="#" class="nav-logo">Lauren's Wildlife</a>
+   
+  <!-- NEW: hamburger -->
+  <div class="menu-toggle" id="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <ul class="nav-links" id="nav-links">
+    <li class="dropdown">
+      <a href="#">Home</a>
+      <ul class="dropdown-menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#outlets">Blended Covers</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#commission">Commission</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </li>
+
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="commissionme.html">Commission Me</a></li>
+  </ul>
+</nav>
+  
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <p class="eyebrow">Portfolio & Commissions</p>
+  <h1>The Work</h1>
+  <p>A selection of original paintings, miniature sculptures, and past commission work.</p>
+</div>
+
+<!-- SECTION NAV -->
+<div class="section-nav">
+  <a href="#paintings">Paintings</a>
+  <a href="#miniatures">Miniatures</a>
+  <a href="#past-commissions">Past Commissions</a>
+  <a href="#commission-form">Commission Me</a>
+</div>
+
+<!-- PAINTINGS -->
+<section class="gallery-section" id="paintings">
+  <div class="gallery-section-header reveal">
+    <p class="label">Original Works</p>
+    <h2>Paintings</h2>
+    <p>Acrylic and watercolor works inspired by wildlife, botanicals, and the Colorado landscape.</p>
+  </div>
+  <div class="gallery-grid" id="paintings-grid">
+    <!-- Replace src with your actual image paths, e.g. src="images/painting1.jpg" -->
+    <!-- Example item structure — duplicate and fill in your own images & titles -->
+    <div class="gallery-item reveal" data-title="Untitled Study" data-medium="Watercolor" data-src="images/painting1.jpg">
+      <img src="images/painting1.jpg" alt="Painting 1" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div><div class="item-title">Untitled Study</div><div class="item-medium">Watercolor</div></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal" data-title="Wildlife Portrait" data-medium="Acrylic" data-src="images/painting2.jpg">
+      <img src="images/painting2.jpg" alt="Painting 2" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div><div class="item-title">Wildlife Portrait</div><div class="item-medium">Acrylic</div></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal" data-title="Botanical Series" data-medium="Watercolor" data-src="images/painting3.jpg">
+      <img src="images/painting3.jpg" alt="Painting 3" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div><div class="item-title">Botanical Series</div><div class="item-medium">Watercolor</div></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal" data-title="Colorado Study" data-medium="Acrylic" data-src="images/painting4.jpg">
+      <img src="images/painting4.jpg" alt="Painting 4" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div><div class="item-title">Colorado Study</div><div class="item-medium">Acrylic</div></div>
+      </div>
+    </div>
+    <!-- Add more gallery-item divs as needed -->
+    <div class="gallery-placeholder reveal">
+      <div class="placeholder-icon">🖼</div>
+      <div class="placeholder-text">Add more paintings</div>
+    </div>
+  </div>
+</section>
+
+<!-- MINIATURES -->
+<section class="gallery-section" id="miniatures">
+  <div class="gallery-section-header reveal">
+    <p class="label">Small Wonders</p>
+    <h2>Miniatures</h2>
+    <p>Hand-sculpted creatures and figures in clay, and small paintings captured on unsuspecting natural canvases. Remarkably detailed at any scale.
+    </p>
+    <p>
+      The walnuts are a labor of love, I crack or cut them open myself, and feed the contents to our resident squirrel family, then the walnuts are cleaned out and prepped for the real crafting to begin.
+    </p>
+  </div>
+  <div class="gallery-grid" id="miniatures-grid">
+    <div class="gallery-item reveal" data-title="Tiny Creature" data-medium="Clay Sculpture" data-src="images/mini1.jpg">
+      <img src="images/mini1.jpg" alt="Miniature 1" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div><div class="item-title">Tiny Creature</div><div class="item-medium">Clay Sculpture</div></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal" data-title="Wildlife Miniature" data-medium="Clay Sculpture" data-src="images/mini2.jpg">
+      <img src="images/mini2.jpg" alt="Miniature 2" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div><div class="item-title">Wildlife Miniature</div><div class="item-medium">Clay Sculpture</div></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal" data-title="Botanical Figure" data-medium="Mixed Media" data-src="images/mini3.jpg">
+      <img src="images/mini3.jpg" alt="Miniature 3" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div><div class="item-title">Botanical Figure</div><div class="item-medium">Mixed Media</div></div>
+      </div>
+    </div>
+    <div class="gallery-placeholder reveal">
+      <div class="placeholder-icon">🪨</div>
+      <div class="placeholder-text">Add more miniatures</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAST COMMISSIONS -->
+<section class="gallery-section" id="past-commissions">
+  <div class="gallery-section-header reveal">
+    <p class="label">Client Work</p>
+    <h2>Past Commissions</h2>
+    <p>A selection of custom work made for clients — spanning painting, embroidery, decor, blended outlet covers, and more.</p>
+  </div>
+  <div class="gallery-grid" id="commissions-grid">
+    <div class="gallery-item reveal" data-title="Custom Commission" data-medium="Acrylic on Canvas" data-src="images/commission1.jpg">
+      <img src="images/commission1.jpg" alt="Commission 1" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div><div class="item-title">Custom Commission</div><div class="item-medium">Acrylic on Canvas</div></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal" data-title="Blended Cover" data-medium="Hand-painted Outlet Cover" data-src="images/commission2.jpg">
+      <img src="images/commission2.jpg" alt="Commission 2" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div><div class="item-title">Blended Cover</div><div class="item-medium">Hand-painted Outlet Cover</div></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal" data-title="Embroidered Piece" data-medium="Embroidery on Fabric" data-src="images/commission3.jpg">
+      <img src="images/commission3.jpg" alt="Commission 3" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div><div class="item-title">Embroidered Piece</div><div class="item-medium">Embroidery</div></div>
+      </div>
+    </div>
+    <div class="gallery-placeholder reveal">
+      <div class="placeholder-icon">✨</div>
+      <div class="placeholder-text">Add more commissions</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMISSION FORM -->
+<section class="commission-section" id="commission-form">
+  <div class="commission-inner">
+    <div class="reveal">
+      <p class="label">Let's Collaborate</p>
+      <h2>Request a Commission</h2>
+      <p class="intro">Tell me about what you're envisioning. The more detail you share, the better I can bring your idea to life. I'll follow up within a few days to discuss further.</p>
+    </div>
+
+    <form id="commissionForm" class="reveal">
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@email.com" required>
+        </div>
+
+        <div class="form-group form-full">
+          <label for="commission-type">Type of Commission</label>
+          <select id="commission-type" name="commission_type" required>
+            <option value="" disabled selected>Select a category...</option>
+            <option>Acrylic Painting</option>
+            <option>Watercolor Painting</option>
+            <option>Miniature Sculpture (Clay)</option>
+            <option>Embroidery / Apparel</option>
+            <option>Blended Outlet / Switch Plate Cover</option>
+            <option>Stationery / Graphic Design</option>
+            <option>Holiday Decor</option>
+            <option>Plant Stakes</option>
+            <option>Glass Etching</option>
+            <option>Woodworking</option>
+            <option>Vinyl</option>
+            <option>Mixed Media</option>
+            <option>Other / Not Sure</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="budget">Budget Range</label>
+          <select id="budget" name="budget">
+            <option value="" disabled selected>Select a range...</option>
+            <option>Under $50</option>
+            <option>$50 – $100</option>
+            <option>$100 – $250</option>
+            <option>$250 – $500</option>
+            <option>$500 – $1,000</option>
+            <option>$1,000+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="timeline">Timeline / Deadline</label>
+          <select id="timeline" name="timeline">
+            <option value="" disabled selected>When do you need it?</option>
+            <option>No rush — flexible</option>
+            <option>Within 1 month</option>
+            <option>Within 2–3 months</option>
+            <option>Within 6 months</option>
+            <option>Specific date (mention below)</option>
+          </select>
+        </div>
+
+        <div class="form-group form-full">
+          <label for="description">Tell me about your vision</label>
+          <textarea id="description" name="description" placeholder="Describe what you're imagining — subject matter, colors, size, where it will live, any special meaning behind it, or anything else that feels relevant. No idea is too rough or too detailed." required></textarea>
+        </div>
+
+        <div class="form-group form-full">
+          <label>Reference Images (optional)</label>
+          <div class="file-upload-area" id="uploadArea">
+            <input type="file" id="refImages" name="ref_images" multiple accept="image/*" onchange="handleFiles(this)">
+            <div class="upload-icon">📎</div>
+            <div class="upload-text"><strong>Click to upload</strong> or drag and drop<br>JPG, PNG, GIF up to 10MB each</div>
+            <div class="file-list" id="fileList"></div>
+          </div>
+          <p class="form-note">Photos of your space, color swatches, inspiration images, or examples of styles you love.</p>
+        </div>
+
+      </div>
+
+      <p class="form-note" style="margin-top: 1.5rem;">* I'll never share your information. This form goes directly to my inbox.</p>
+      <button type="submit" class="btn-submit">Send My Request →</button>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon">🌿</div>
+      <h3>Request received!</h3>
+      <p>Thank you for reaching out. I'll review your request and get back to you within a few days to talk through the details.<br><br>In the meantime, feel free to browse the gallery above for more inspiration.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
+    <div style="position:relative;">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+      <div class="lightbox-watermark">LAUREN'S WILDLIFE</div>
+    </div>
+    <div class="lightbox-caption">
+      <div class="title" id="lightboxTitle"></div>
+      <div class="medium" id="lightboxMedium"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Lauren's Wildlife</div>
+  <a href="index.html" class="footer-back">← Back to Home</a>
+</footer>
+
+<!-- Script -->
+<script>
+   
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // Disable right-click on images
+  document.addEventListener('contextmenu', e => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const lbTitle = document.getElementById('lightboxTitle');
+  const lbMedium = document.getElementById('lightboxMedium');
+  let currentItems = [], currentIndex = 0;
+
+  function openLightbox(items, index) {
+    currentItems = items;
+    currentIndex = index;
+    showSlide(index);
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function showSlide(i) {
+    const item = currentItems[i];
+    lbImg.src = item.dataset.src;
+    lbTitle.textContent = item.dataset.title || '';
+    lbMedium.textContent = item.dataset.medium || '';
+  }
+
+  document.querySelectorAll('.gallery-item').forEach((item, _, arr) => {
+    const section = item.closest('.gallery-grid');
+    item.addEventListener('click', () => {
+      const sectionItems = Array.from(section.querySelectorAll('.gallery-item'));
+      const idx = sectionItems.indexOf(item);
+      openLightbox(sectionItems, idx);
+    });
+  });
+
+  document.getElementById('lightboxClose').addEventListener('click', () => {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  document.getElementById('lightboxPrev').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length;
+    showSlide(currentIndex);
+  });
+
+  document.getElementById('lightboxNext').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % currentItems.length;
+    showSlide(currentIndex);
+  });
+
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+    if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length; showSlide(currentIndex); }
+    if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentItems.length; showSlide(currentIndex); }
+  });
+
+  // File upload display
+  function handleFiles(input) {
+    const list = document.getElementById('fileList');
+    list.innerHTML = '';
+    Array.from(input.files).forEach(f => {
+      const chip = document.createElement('span');
+      chip.className = 'file-chip';
+      chip.textContent = f.name;
+      list.appendChild(chip);
+    });
+  }
+
+  // Form submit — uses Formspree (free tier)
+  // Replace YOUR_FORM_ID below with your Formspree form ID
+  document.getElementById('commissionForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('formSuccess').classList.add('show');
+      } else {
+        alert('Something went wrong. Please try emailing me directly!');
+      }
+    } catch {
+      alert('Something went wrong. Please try emailing me directly!');
+    }
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => obs.observe(el));
+
+  // Active section nav highlight
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.section-nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+
+   
+
+// =====================
+// NAVBAR (SAFE FIX)
+// =====================
+
+// avoid name collision with your existing navLinks
+const navMenu = document.getElementById('nav-links');
+const menuToggle = document.getElementById('menu-toggle');
+const navBar = document.querySelector('.nav');
+
+// hamburger toggle
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    console.log("Click Worked");
+  });
+}
+
+// scroll effect (safe)
+if (navBar) {
+  window.addEventListener('scroll', () => {
+    navBar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+}
+
+// close menu on link click (safe + non-breaking)
+if (navMenu) {
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+    });
+  });
+}
+  
+  
+</script>
+</body>
+</html>
