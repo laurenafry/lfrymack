@@ -551,17 +551,17 @@
     display: block;
   }
 
-  /*Gallery Preview*/
+/*Gallery Preview*/
 .gallery-preview {
   padding: 6rem 5rem;
-  background: var(--moss);
+  background: var(--sand);
   text-align: center;
 }
 
 .gallery-preview h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2rem, 3vw, 3rem);
-  color: var(--sand);
+  color: var(--moss);
   margin-bottom: 3rem;
 }
 
@@ -587,11 +587,12 @@
 
 .gallery-preview a {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 0.85rem;
+  font-size: 1rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--cream);
+  color: var(--moss);
   margin-bottom: 0.8rem;
+  font-weight: 800;
 }
   
 /* Buttons */
@@ -599,8 +600,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: var(--warm-white);
-  color: var(--sage);
+  background: var(--sage);
+  color: var(--warm-white);
   border: none;
   padding: 0.8rem 1rem;
   cursor: pointer;
@@ -1330,6 +1331,7 @@
       <a href="/">Home</a>
       <ul class="dropdown-menu">
         <li><a href="#about">About</a></li>
+		<li><a href="#gallery-preview">Gallery Preview</a></li>  
         <li><a href="#services">Services</a></li>
         <li><a href="#outlets">Blended Covers</a></li>
         <li><a href="#process">Process</a></li>
@@ -1432,7 +1434,7 @@
 </section>
 
 <!--Gallery Preview-->
-<section class="gallery-preview">
+<section class="gallery-preview" id="gallery-preview">
   <p class="section-label">Recent Work</p>
   <h2>Selected Pieces</h2>
 
@@ -1633,6 +1635,7 @@
         <ul>
           <li style="padding-top:15px"><a href="#"><b>Home</b></a></li>
           <li><a href="#about">About</a></li>
+		  <li><a href="#gallery-preview"Gallery Preview</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#outlets">Blended Covers</a></li>
           <li><a href="#process">Process</a></li>
