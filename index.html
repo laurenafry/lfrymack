@@ -333,6 +333,10 @@
     opacity: 0;
     animation: fadeIn 1.2s ease 0.4s forwards;
   }
+  .hero-img {
+    width: 95%; 
+    height: auto;
+  }
 
   .hero-illustration {
     position: absolute; inset: 0;
@@ -340,8 +344,6 @@
     display: flex; align-items: center; justify-content: center;
   }
 
-  /* SVG botanical illustration in hero */
-  .hero-svg { width: 85%; height: 85%; opacity: 0.9; }
 
   .hero-tag {
     position: absolute; bottom: 3rem; left: 3rem;
@@ -1004,6 +1006,11 @@
   .hero-right {
     height: 50vh;
   }
+  .hero-img {
+    width: auto;
+    height: 95%;
+    max-height: 100%
+  }
 
   .hero-tag {
     left: 1.5rem;
@@ -1168,53 +1175,13 @@
   </div>
   <div class="hero-right">
     <div class="hero-illustration">
-      <!-- Botanical SVG illustration -->
-      <svg class="hero-svg" viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Background organic shapes -->
-        <ellipse cx="250" cy="300" rx="180" ry="220" fill="rgba(61,79,53,0.15)"/>
-        <!-- Main stem -->
-        <path d="M250 550 Q240 480 260 420 Q270 360 240 310 Q220 260 250 200 Q270 160 245 100" stroke="#3d4f35" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <!-- Large left leaf -->
-        <path d="M245 350 Q190 310 160 270 Q155 250 170 240 Q200 260 230 300 Q240 320 245 350Z" fill="#7a8c6e" opacity="0.7"/>
-        <path d="M245 350 Q200 340 170 310" stroke="#3d4f35" stroke-width="1" fill="none"/>
-        <!-- Large right leaf -->
-        <path d="M255 300 Q310 270 340 230 Q350 210 335 205 Q305 220 275 260 Q262 278 255 300Z" fill="#7a8c6e" opacity="0.85"/>
-        <path d="M255 300 Q305 285 335 255" stroke="#3d4f35" stroke-width="1" fill="none"/>
-        <!-- Mid left leaf -->
-        <path d="M248 420 Q195 395 175 365 Q170 350 182 345 Q210 365 235 395 Q244 410 248 420Z" fill="#5a7050" opacity="0.6"/>
-        <!-- Mid right leaf -->
-        <path d="M255 240 Q300 205 320 170 Q328 155 315 150 Q288 165 265 200 Q258 220 255 240Z" fill="#9aad88" opacity="0.75"/>
-        <!-- Small accent leaves -->
-        <path d="M247 190 Q220 165 215 140 Q214 130 222 128 Q235 145 245 170 Q248 182 247 190Z" fill="#7a8c6e" opacity="0.65"/>
-        <path d="M253 160 Q275 135 280 110 Q282 100 273 99 Q260 114 253 138 Q251 150 253 160Z" fill="#9aad88" opacity="0.7"/>
-        <!-- Flower/blossom top -->
-        <circle cx="245" cy="90" r="8" fill="#c4956a" opacity="0.9"/>
-        <circle cx="245" cy="90" r="4" fill="#b85c38" opacity="0.8"/>
-        <!-- Petal cluster -->
-        <ellipse cx="235" cy="76" rx="7" ry="12" fill="#c4956a" opacity="0.6" transform="rotate(-20 235 76)"/>
-        <ellipse cx="256" cy="78" rx="7" ry="12" fill="#c4956a" opacity="0.6" transform="rotate(20 256 78)"/>
-        <ellipse cx="244" cy="70" rx="6" ry="11" fill="#d4a57a" opacity="0.7" transform="rotate(-5 244 70)"/>
-        <!-- Small berries -->
-        <circle cx="165" cy="268" r="5" fill="#b85c38" opacity="0.7"/>
-        <circle cx="158" cy="278" r="4" fill="#b85c38" opacity="0.6"/>
-        <circle cx="172" cy="276" r="3.5" fill="#c4956a" opacity="0.8"/>
-        <!-- Ground element -->
-        <path d="M180 555 Q250 530 320 555" stroke="#3d4f35" stroke-width="1.5" fill="none" opacity="0.4"/>
-        <!-- Roots suggestion -->
-        <path d="M250 550 Q235 565 220 580" stroke="#3d4f35" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
-        <path d="M250 550 Q262 570 278 585" stroke="#3d4f35" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
-        <path d="M250 550 Q248 572 245 590" stroke="#3d4f35" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
-        <!-- Scattered dots / seeds -->
-        <circle cx="310" cy="380" r="2.5" fill="#c4956a" opacity="0.5"/>
-        <circle cx="180" cy="340" r="2" fill="#c4956a" opacity="0.4"/>
-        <circle cx="320" cy="290" r="2" fill="#c4956a" opacity="0.5"/>
-        <circle cx="175" cy="440" r="1.5" fill="#7a8c6e" opacity="0.5"/>
-      </svg>
+      <img class="hero-img" src="images/Lauren Fry Mackie_Profile.png">
     </div>
     <div class="hero-tag">
       "Every piece begins with the natural world."
     </div>
   </div>
+
 </section>
 
 <!-- MARQUEE -->
