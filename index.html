@@ -551,6 +551,78 @@
     display: block;
   }
 
+  /*Gallery Preview*/
+.gallery-preview {
+  padding: 6rem 5rem;
+  background: var(--moss);
+  text-align: center;
+}
+
+.gallery-preview h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  color: var(--sand);
+  margin-bottom: 3rem;
+}
+
+.gallery-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 1.5rem;
+  transition: transform 0.4s ease;
+}
+
+.gallery-track img {
+  width: calc(100% / 3 - 1rem);
+  height: 260px;
+  object-fit: cover;
+  border-radius: 6px;
+  pointer-events: none; /* prevents dragging */
+  user-select: none;
+}
+
+.gallery-preview a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 0.8rem;
+}
+  
+/* Buttons */
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--warm-white);
+  color: var(--sage);
+  border: none;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0.85;
+}
+
+.gallery-btn:hover {
+  opacity: 1;
+}
+
+.gallery-btn.prev { left: 0; }
+.gallery-btn.next { right: 0; }
+
+/* Mobile */
+@media (max-width: 900px) {
+  .gallery-track img {
+    width: calc(100% - 2rem); /* 1 image */
+  }
+}
+
+	
   /* SERVICES */
   .services {
     background: var(--cream);
@@ -1359,6 +1431,32 @@
   </div>
 </section>
 
+<!--Gallery Preview-->
+<section class="gallery-preview">
+  <p class="section-label">Recent Work</p>
+  <h2>Selected Pieces</h2>
+
+  <div class="gallery-wrapper">
+    <button class="gallery-btn prev">&#8592;</button>
+
+    <div class="gallery-track" id="galleryTrack">
+      <img src="images/CheetahPainting_Watercolor.png" alt="Cheetah Portrait - Watercolor" data-title="Cheetah Portrait - Watercolor - Lauren Fry Mackie">
+      <img src="images/LaurenFryMackie_IsleofSkye_Acrylic.png" alt="Isle of Skye - Acrylic" data-title="Isle of Skye - Acrylic - Lauren Fry Mackie">
+      <img src="images/LFM_SlopeInSpring_Acrylic.png" alt="Slope in Spring - Acrylic" data-title="Slope in Spring - Acrylic - Lauren Fry Mackie">
+      <img src="images/Jaguar_Watercolor.png" alt="Jaguar Portrait - Watercolor" data-title="Jaguar Portrait - Watercolor - Lauren Fry Mackie">
+      <img src="images/LaurenFryMackie_Jaguar in tree_Watercolor.png" alt="Jaguar in Tree - Watercolor" data-title="Jaguar in Tree - Watercolor - Lauren Fry Mackie">
+      <img src="images/LaurenFryMackie_Squirrel Acorn.png" alt="Squirrel on Acorn - Acrylic" data-title="Squirrel on Acorn - Acrylic - Lauren Fry Mackie">
+     
+      <img src="images/LaurenFryMackie_Puffin Walnut.png" alt="Puffin Walnut - Clay Sculpture Mixed Media" data-title="Puffin Walnut - Lauren Fry Mackie">
+      <img src="images/LaurenFryMackie_Penguin Walnut.png" alt="Penguin in Walnut - Clay Sculpture" data-title="Penguin in Walnut - Clay Sculpture - Lauren Fry Mackie">
+      <img src="images/LaurenFryMackie_Stone Cabin Walnut cropped.png" alt="Stone Cabin Walnut - Clay Sculpture Mixed Media" data-title="Stone Cabin Walnut - Clay Sculpture Mixed Media - Lauren Fry Mackie">
+    
+    </div>
+    <button class="gallery-btn next">&#8594;</button>
+    <p><b><a href="gallery.html">View Full Gallery</a></b></p>
+  </div>
+</section>
+	
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="services-header reveal">
