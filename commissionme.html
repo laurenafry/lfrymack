@@ -517,7 +517,7 @@
 
   <ul class="nav-links" id="nav-links">
     <li class="dropdown">
-      <a href="#">Home</a>
+      <a href="index.html">Home</a>
       <ul class="dropdown-menu">
         <li><a href="/#about">About</a></li>
         <li><a href="/#services">Services</a></li>
@@ -583,42 +583,44 @@
       <h2>Request a Commission</h2>
       <p class="intro">Tell me about what you're envisioning. The more detail you share, the better I can bring your idea to life. I'll follow up within a few days to discuss further.</p>
     </div>
-
-    <form id="commissionForm" class="reveal">
+    <form action="https://formspree.io/f/xbdponze" method="POST" enctype="multipart/form-data" class="reveal" id="contact-form">
       <div class="form-grid">
-
+        
         <div class="form-group">
-          <label for="name">Your Name</label>
+          <label for="name">Your Name
           <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+          </label>
         </div>
 
         <div class="form-group">
-          <label for="email">Email Address</label>
+          <label for="email">Email Address
           <input type="email" id="email" name="email" placeholder="jane@email.com" required>
+          </label>
         </div>
 
         <div class="form-group form-full">
-          <label for="commission-type">Type of Commission</label>
+          <label for="commission-type">Type of Commission
           <select id="commission-type" name="commission_type" required>
             <option value="" disabled selected>Select a category...</option>
             <option>Acrylic Painting</option>
             <option>Watercolor Painting</option>
-            <option>Miniature Sculpture (Clay)</option>
+            <option>Miniature Sculpture</option>
             <option>Embroidery / Apparel</option>
             <option>Blended Outlet / Switch Plate Cover</option>
             <option>Stationery / Graphic Design</option>
             <option>Holiday Decor</option>
             <option>Plant Stakes</option>
             <option>Glass Etching</option>
-            <option>Woodworking</option>
+            <!-- <option>Woodworking</option> -->
             <option>Vinyl</option>
             <option>Mixed Media</option>
             <option>Other / Not Sure</option>
           </select>
+          </label>
         </div>
 
         <div class="form-group">
-          <label for="budget">Budget Range</label>
+          <label for="budget">Budget Range
           <select id="budget" name="budget">
             <option value="" disabled selected>Select a range...</option>
             <option>Under $50</option>
@@ -629,10 +631,11 @@
             <option>$1,000+</option>
             <option>Not sure yet</option>
           </select>
+          </label>
         </div>
 
         <div class="form-group">
-          <label for="timeline">Timeline / Deadline</label>
+          <label for="timeline">Timeline / Deadline
           <select id="timeline" name="timeline">
             <option value="" disabled selected>When do you need it?</option>
             <option>No rush — flexible</option>
@@ -641,11 +644,13 @@
             <option>Within 6 months</option>
             <option>Specific date (mention below)</option>
           </select>
+          </label>  
         </div>
 
         <div class="form-group form-full">
-          <label for="description">Tell me about your vision</label>
+          <label for="description">Tell me about your vision
           <textarea id="description" name="description" placeholder="Describe what you're imagining — subject matter, colors, size, where it will live, any special meaning behind it, or anything else that feels relevant. No idea is too rough or too detailed." required></textarea>
+          </label>  
         </div>
 
         <div class="form-group form-full">
@@ -658,14 +663,14 @@
           </div>
           <p class="form-note">Photos of your space, color swatches, inspiration images, or examples of styles you love.</p>
         </div>
-
       </div>
 
       <p class="form-note" style="margin-top: 1.5rem;">* I'll never share your information. This form goes directly to my inbox.</p>
-      <button type="submit" class="btn-submit">Send My Request →</button>
+      
+    <button type="submit" class="btn-submit" data-fs-submit-btn>Send My Request →</button>
     </form>
 
-    <div class="form-success" id="formSuccess">
+    <div class="form-success" id="formSuccess" data-fs-success>
       <div class="success-icon">🌿</div>
       <h3>Request received!</h3>
       <p>Thank you for reaching out. I'll review your request and get back to you within a few days to talk through the details.<br><br>In the meantime, feel free to browse the gallery above for more inspiration.</p>
@@ -780,29 +785,7 @@
     });
   }
 
-  // Form submit — uses Formspree (free tier)
-  // Replace YOUR_FORM_ID below with your Formspree form ID
-  document.getElementById('commissionForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-    try {
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        form.style.display = 'none';
-        document.getElementById('formSuccess').classList.add('show');
-      } else {
-        alert('Something went wrong. Please try emailing me directly!');
-      }
-    } catch {
-      alert('Something went wrong. Please try emailing me directly!');
-    }
-  });
-
+  
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
@@ -856,8 +839,20 @@ if (navMenu) {
     });
   });
 }
-  
-  
+
+ //New Form Scripts
+  window.formspree =
+    window.formspree ||
+    function () {
+      (formspree.q = formspree.q || []).push(arguments);
+    };
+  formspree(
+    'initForm', 
+    { formElement: '#contact-form', formId: 'xbdponze' }
+  );
+ 
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer>
 </script>
 </body>
 </html>
