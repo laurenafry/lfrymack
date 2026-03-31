@@ -391,7 +391,7 @@
   .about-visual {
     background: var(--sand);
     display: flex; align-items: center; justify-content: center;
-    padding: 5rem;
+    padding: 2rem;
     position: relative;
     overflow: hidden;
   }
@@ -405,7 +405,7 @@
 
   .about-monogram {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 18rem;
+    font-size: clamp(8rem, 20vw, 18rem);
     font-weight: 300;
     color: var(--sage);
     opacity: 0.18;
@@ -413,37 +413,95 @@
     line-height: 1;
     user-select: none;
   }
+  
 
-  .about-badge {
-    width: 260px; height: 260px;
-    border-radius: 50%;
-    background: var(--moss);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center;
-    position: relative; z-index: 2;
-    padding: 2.5rem;
-    box-shadow: 0 20px 60px rgba(61,79,53,0.3);
-  }
-  .about-badge-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    color: var(--cream);
-    font-style: italic;
-    margin-bottom: 0.5rem;
-  }
-  .about-badge-sub {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--clay);
+  .about-graphic {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    font-size: clamp(14px, 1.6vw, 20px);
   }
 
-  .about-text {
+/* BASE CIRCLE */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--cream);
+  padding: .5rem;
+  line-height: 1.2;
+  transition: all 0.4s ease;
+}
+
+/* MAIN CIRCLES */
+.big {
+  width: 40%;
+  aspect-ratio: 1;
+  background: var(--moss);
+  font-size: 1.75em;
+
+  top: 10%;
+  left: 45%;
+}
+
+.medium {
+  width: 35%;
+  aspect-ratio: 1;
+  background: rgba(122,140,110,0.7);
+  font-size: 1.5em;
+
+  top: 40%;
+  left: 10%;
+}
+
+.small {
+  width: 28%;
+  aspect-ratio: 1;
+  background: rgba(122,140,110,0.9);
+  font-size: 1.25em;
+
+  bottom: 5%;
+  left: 40%;
+}
+
+/* ACCENTS */
+.accent1 {
+  width: 18%;
+  aspect-ratio: 1;
+  background: rgba(196,149,106,0.5);
+
+  top: 5%;
+  left: 5%;
+}
+
+.accent2 {
+  width: 20%;
+  aspect-ratio: 1;
+  background: rgba(255,255,255,0.5);
+
+  bottom: 10%;
+  left: 20%;
+}
+
+.accent3 {
+  width: 12%;
+  aspect-ratio: 1;
+  background: rgba(196,149,106,0.6);
+
+  bottom: 15%;
+  right: 10%;
+}
+.about-text {
     padding: 6rem 5rem;
     display: flex; flex-direction: column; justify-content: center;
     background: var(--warm-white);
   }
+
+
 
   .section-label {
     font-size: 0.65rem;
@@ -985,60 +1043,118 @@
 /* =========================
    MOBILE RESPONSIVE FIXES
    ========================= */
-@media (max-width: 600px) {
-
-  /* GLOBAL SPACING */
-  section {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
+@media (max-width: 650px) {
+.about-visual {
+    background: var(--sand);
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* HERO */
-  .hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  .hero-left {
-    padding: 7rem 1.5rem 2rem 1.5rem;
-  }
-
-  .hero-right {
-    height: 50vh;
-  }
-  .hero-img {
-    width: auto;
-    height: 95%;
-    max-height: 100%
-  }
-
-  .hero-tag {
-    left: 1.5rem;
-    bottom: 1.5rem;
-    max-width: 180px;
-    font-size: 0.85rem;
-  }
-
-  /* ABOUT */
-  .about {
-    grid-template-columns: 1fr;
-  }
-
-  .about-visual {
-    padding: 3rem 1.5rem;
+  .about-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 70%, var(--clay) 0%, transparent 60%);
+    opacity: 0.3;
   }
 
   .about-monogram {
-    font-size: 8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(8rem, 20vw, 18rem);
+    font-weight: 300;
+    color: var(--sage);
+    opacity: 0.18;
+    position: absolute;
+    line-height: 1;
+    user-select: none;
+  }
+  
+
+  .about-graphic {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    font-size: clamp(14px, 1.6vw, 20px);
   }
 
-  .about-badge {
-    width: 200px;
-    height: 200px;
-  }
+/* BASE CIRCLE */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--cream);
+  padding: .5rem;
+  line-height: 1.2;
+  transition: all 0.4s ease;
+}
 
-  .about-text {
-    padding: 3rem 1.5rem;
+/* MAIN CIRCLES */
+.big {
+  width: 40%;
+  aspect-ratio: 1;
+  background: var(--moss);
+  font-size: 1.75em;
+
+  top: 10%;
+  left: 45%;
+}
+
+.medium {
+  width: 35%;
+  aspect-ratio: 1;
+  background: rgba(122,140,110,0.7);
+  font-size: 1.5em;
+
+  top: 40%;
+  left: 10%;
+}
+
+.small {
+  width: 28%;
+  aspect-ratio: 1;
+  background: rgba(122,140,110,0.9);
+  font-size: 1.25em;
+
+  bottom: 5%;
+  left: 40%;
+}
+
+/* ACCENTS */
+.accent1 {
+  width: 18%;
+  aspect-ratio: 1;
+  background: rgba(196,149,106,0.5);
+
+  top: 5%;
+  left: 5%;
+}
+
+.accent2 {
+  width: 20%;
+  aspect-ratio: 1;
+  background: rgba(255,255,255,0.5);
+
+  bottom: 10%;
+  left: 20%;
+}
+
+.accent3 {
+  width: 12%;
+  aspect-ratio: 1;
+  background: rgba(196,149,106,0.6);
+
+  bottom: 15%;
+  right: 10%;
+}
+.about-text {
+    padding: 6rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    background: var(--warm-white);
   }
 
   .about-stats {
@@ -1195,17 +1311,22 @@
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-visual">
-    <div class="about-monogram">W</div>
-    <div class="about-badge">
-      <div class="about-badge-title">Wildlife &<br>Conservation Biology</div>
-      <div class="about-badge-sub">CSU · Fort Collins, CO</div>
-    </div>
-  </div>
+    <div class="about-monogram">LW</div>
+	    <div class="about-graphic">
+	  		<div class="circle big">Wildlife<br>Biology</div>
+	 		<div class="circle medium">Scotland</div>
+	 		<div class="circle small">Colorado</div>
+		  <!-- accent circles -->
+	  		<div class="circle accent1"></div>
+	  		<div class="circle accent2"></div>
+	  		<div class="circle accent3"></div>
+		</div>
+ 	</div>
   <div class="about-text">
     <p class="section-label">About the Artist</p>
     <h2>Where science<br>meets <em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--rust)">craft.</em></h2>
     <p>
-      My art begins outdoors — in the field, in the forest, at the water's edge. Growing up I was always outside, searching for animals, fishing, climbing way too high up in a tree, ever in search of the perfect stick.
+      Hi, I'm Lauren! My art begins outdoors — in the field, in the forest, at the water's edge. Growing up I was always outside, searching for animals, fishing, climbing way too high up in a tree, ever in search of the perfect stick.
       Studying wildlife and conservation biology at Colorado State University gave me
       an intimate understanding of the natural world: the way light hits a feather,
       how lichen grows across stone, the improbable colors of a Colorado meadow.
