@@ -1711,7 +1711,31 @@ reveals.forEach(el => observer.observe(el));
   }
   animRing();
 
-  
+    //Gallery Preview
+  const track = document.getElementById("galleryTrack");
+const prev = document.querySelector(".gallery-btn.prev");
+const next = document.querySelector(".gallery-btn.next");
+
+let index = 0;
+
+next.onclick = () => {
+  if (index < track.children.length - 3) {
+    index++;
+    updateGallery();
+  }
+};
+
+prev.onclick = () => {
+  if (index > 0) {
+    index--;
+    updateGallery();
+  }
+};
+
+function updateGallery() {
+  const width = track.children[0].offsetWidth + 24; // gap included
+  track.style.transform = `translateX(-${index * width}px)`;
+}
   
 };
 </script>  
