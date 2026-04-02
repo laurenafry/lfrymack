@@ -396,7 +396,13 @@
     overflow: hidden;
   }
 
-  .about-visual::before {
+  .about-img {
+    width: 95%; 
+    height: auto;
+  }
+
+  /*
+	.about-visual::before {
     content: '';
     position: absolute; inset: 0;
     background: radial-gradient(ellipse at 30% 70%, var(--clay) 0%, transparent 60%);
@@ -420,10 +426,12 @@
     width: 100%;
     height: 400px;
     font-size: clamp(14px, 1.6vw, 20px);
+	*/
   }
 
 /* BASE CIRCLE */
-.circle {
+/*
+	.circle {
   position: absolute;
   border-radius: 50%;
   display: flex;
@@ -436,9 +444,10 @@
   line-height: 1.2;
   transition: all 0.4s ease;
 }
+*/
 
 /* MAIN CIRCLES */
-.big {
+/*.big {
   width: 40%;
   aspect-ratio: 1;
   background: var(--moss);
@@ -469,7 +478,7 @@
 }
 
 /* ACCENTS */
-.accent1 {
+/*.accent1 {
   width: 18%;
   aspect-ratio: 1;
   background: rgba(196,149,106,0.5);
@@ -495,6 +504,8 @@
   bottom: 15%;
   right: 10%;
 }
+	*/
+	
 .about-text {
     padding: 6rem 5rem;
     display: flex; flex-direction: column; justify-content: center;
@@ -1117,8 +1128,13 @@
     position: relative;
     overflow: hidden;
   }
+  .about-img {
+    width: 95%; 
+    height: auto;
+  }
 
-  .about-visual::before {
+  /*Block out about
+	.about-visual::before {
     content: '';
     position: absolute; inset: 0;
     background: radial-gradient(ellipse at 30% 70%, var(--clay) 0%, transparent 60%);
@@ -1143,9 +1159,11 @@
     height: 400px;
     font-size: clamp(14px, 1.6vw, 20px);
   }
-
+*/
+	
 /* BASE CIRCLE */
-.circle {
+/* Block out about 
+	.circle {
   position: absolute;
   border-radius: 50%;
   display: flex;
@@ -1158,9 +1176,11 @@
   line-height: 1.2;
   transition: all 0.4s ease;
 }
+	*/
 
 /* MAIN CIRCLES */
-.big {
+  /* Block out About
+	.big {
   width: 40%;
   aspect-ratio: 1;
   background: var(--moss);
@@ -1189,9 +1209,11 @@
   bottom: 5%;
   left: 40%;
 }
+	*/
 
 /* ACCENTS */
-.accent1 {
+/* BLock out About
+	.accent1 {
   width: 18%;
   aspect-ratio: 1;
   background: rgba(196,149,106,0.5);
@@ -1217,6 +1239,7 @@
   bottom: 15%;
   right: 10%;
 }
+	*/
 .about-text {
     padding: 6rem 5rem;
     display: flex; flex-direction: column; justify-content: center;
@@ -1383,17 +1406,23 @@
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-visual">
-    <div class="about-monogram">LW</div>
+	  <!-- About Image -->
+	  <img src="images/AboutBubbles.png">
+    <!-- Block out About 
+	  <div class="about-monogram">LW</div>
 	    <div class="about-graphic">
 	  		<div class="circle big">Wildlife<br>Biology</div>
 	 		<div class="circle medium">Scotland</div>
 	 		<div class="circle small">Colorado</div>
+	  -->
 		  <!-- accent circles -->
+	  <!-- Block out About
 	  		<div class="circle accent1"></div>
 	  		<div class="circle accent2"></div>
 	  		<div class="circle accent3"></div>
 		</div>
  	</div>
+	  -->
   <div class="about-text">
     <p class="section-label">About the Artist</p>
     <h2>Where science<br>meets <em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--rust)">craft.</em></h2>
