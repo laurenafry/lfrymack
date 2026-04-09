@@ -328,9 +328,13 @@
   .hero-cta::after { content: '→'; }
 
   .hero-right {
+	display: flex; 
+    align-items: center; 
+    justify-content: center;
     position: relative;
     overflow: hidden;
     opacity: 0;
+	background: linear-gradient(135deg, var(--sand) 0%, var(--sage) 40%, var(--moss) 100%);
     animation: fadeIn 1.2s ease 0.4s forwards;
   }
   .hero-img {
@@ -339,9 +343,11 @@
   }
 
   .hero-illustration {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--sand) 0%, var(--sage) 40%, var(--moss) 100%);
-    display: flex; align-items: center; justify-content: center;
+    position: relative; 
+	inset: 0;
+    display: flex; 
+	align-items: center; 
+	justify-content: center;
   }
 
 
@@ -1066,6 +1072,15 @@
    MOBILE RESPONSIVE FIXES
    ========================= */
 @media (max-width: 650px) {
+/* HERO */
+   .hero {
+    grid-template-columns: 1fr;
+  }
+  .hero-img {
+    width: 75%; 
+    height: auto;
+  }
+	
  /* ABOUT */
   .about {
     grid-template-columns: 1fr;
