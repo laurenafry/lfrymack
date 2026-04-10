@@ -242,13 +242,19 @@
 
   /* SECTION NAV */
   .section-nav {
-    position: static; top: 62px; z-index: 100;
+    position: static; 
+	  top: 62px; 
+	  z-index: 100;
     background: var(--warm-white);
     border-bottom: 1px solid var(--sand);
-    display: flex; justify-content: center; gap: 0;
+    display: flex; 
+	  justify-content: center; 
+	  gap: 0;
   }
   .section-nav a {
-    padding: 1.1rem 2rem;
+    display: flex; 
+    justify-content: center;
+	padding: 1.1rem 2rem;
     font-size: 0.72rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -262,7 +268,7 @@
   .section-nav a.active { opacity: 1; color: var(--rust); border-bottom-color: var(--rust); }
 
   /* GALLERY SECTION */
-  .gallery-section { padding: 6rem 5rem; }
+  .gallery-section { padding: 5rem 5rem; }
   .gallery-section + .gallery-section { border-top: 1px solid var(--sand); }
 
   .gallery-section-header { margin-bottom: 3rem; }
@@ -603,11 +609,17 @@
 
   
   /* Section Nav */
+  .section-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+  }
+	
   .section-nav a {
     padding: .7rem 1rem;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 0.175em;
-}
+  }
 
   /* COMMISSION */
   .commission {
@@ -890,49 +902,49 @@
 	
   <div class="gallery-grid" id="commissions-grid">
 	  
-    <div class="gallery-item reveal" data-title="Custom Commission" data-medium="Embroidery" data-src="images/Thumbs/LFM_Thumbnail_CustomHikingGloves.jpeg">
+    <div class="gallery-item reveal" style="aspect-ratio: 4/3;" data-title="Custom Commissioned Embroidered Hiking Gloves" data-medium="Embroidery" data-src="images/Thumbs/LFM_Thumbnail_CustomHikingGloves.jpeg">
       <img src="images/Thumbs/LFM_Thumbnail_CustomHikingGloves.jpeg" alt="Custom Hiking Gloves For Group, with Initials" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Custom Hiking Gloves For Group, with Initials</div><div class="item-medium">Embroidery</div></div>
       </div>
     </div>
 	  
-    <div class="gallery-item reveal" data-title="Blended Cover" data-medium="Hand-painted Outlet Cover" data-src="images/LaurensWildlife_BlendedOutletExample.png">
+    <div class="gallery-item reveal" style="aspect-ratio: 4/3;" data-title="Blended Cover" data-medium="Hand-painted Outlet Cover" data-src="images/LaurensWildlife_BlendedOutletExample.png">
       <img src="images/Thumbs/LFM_Thumbnail_OutletCover.jpeg" alt="Hand-Painted Outlet Cover To Blend with Natural Stone" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Blended Cover</div><div class="item-medium">Hand-painted Outlet Cover</div></div>
       </div>
     </div>
 
-	<div class="gallery-item reveal" data-title="Custom Cornhole Boards" data-medium="Paint and Vinyl" data-src="images/Thumbs/LFM_Thumbnail_CustomCornhole.jpeg">
+	<div class="gallery-item reveal" style="aspect-ratio: 4/3;" data-title="Custom Cornhole Boards" data-medium="Paint and Vinyl" data-src="images/Thumbs/LFM_Thumbnail_CustomCornhole.jpeg">
       <img src="images/Thumbs/LFM_Thumbnail_CustomCornhole.jpeg" alt="Custom Cornhole Boards" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">ustom Cornhole Boards</div><div class="item-medium">Paint and Vinyl</div></div>
       </div>
     </div> 
 	  
-	<div class="gallery-item reveal" data-title="Custom Event Signage" data-medium="Custom Event Signage of Vinyl on Acrylic" data-src="images/Thumbs/LFM_Thumbnail_OwenSignage.jpeg">
+	<div class="gallery-item reveal" style="aspect-ratio: 4/3;" data-title="Custom Event Signage" data-medium="Custom Event Signage of Vinyl on Acrylic" data-src="images/Thumbs/LFM_Thumbnail_OwenSignage.jpeg">
       <img src="images/Thumbs/LFM_Thumbnail_OwenSignage.jpeg" alt="Custom Event Signage" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Custom Event Signage</div><div class="item-medium">Vinyl on Acrylic</div></div>
       </div>
     </div>  
 
-	<div class="gallery-item reveal" data-title="Custom Event Glassware" data-medium="Vinyl on Glass" data-src="images/Thumbs/LFM_Thumbnail_DrinkLikeAFish.jpeg">
-      <img src="images/Thumbs/LFM_Thumbnail_DrinkLikeAFish.jpeg" alt="Commission 3" loading="lazy">
+	<div class="gallery-item reveal" style="aspect-ratio: 4/3;" data-title="Custom Event Glassware" data-medium="Vinyl on Glass" data-src="images/Thumbs/LFM_Thumbnail_DrinkLikeAFish.jpeg">
+      <img src="images/Thumbs/LFM_Thumbnail_DrinkLikeAFish_43.jpeg" alt="Commission 3" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Custom Event Wedding Gifts</div><div class="item-medium">Vinyl + Etching on Glass</div></div>
       </div>
     </div>  
 
-	<div class="gallery-item reveal" data-title="Embroidered Piece" data-medium="Embroidery on Fabric" data-src="images/Thumbs/LFM_Thumbnail_CustomDogBandanas.jpeg">
+	<div class="gallery-item reveal" style="aspect-ratio: 4/3;" data-title="Embroidered Piece" data-medium="Embroidery on Fabric" data-src="images/Thumbs/LFM_Thumbnail_CustomDogBandanas.jpeg">
       <img src="images/Thumbs/LFM_Thumbnail_CustomDogBandanas.jpeg" alt="Custom Dog Bandanas" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Custom Dog Bandanas</div><div class="item-medium">Embroidery</div></div>
       </div>
     </div>  
 	  
-    <!--<div class="gallery-item reveal" data-title="Embroidered Piece" data-medium="Embroidery on Fabric" data-src="images/commission3.jpg">
+    <!--<div class="gallery-item reveal" style="aspect-ratio: 4/3;" data-title="Embroidered Piece" data-medium="Embroidery on Fabric" data-src="images/commission3.jpg">
       <img src="images/commission3.jpg" alt="Commission 3" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Embroidered Piece</div><div class="item-medium">Embroidery</div></div>
