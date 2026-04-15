@@ -358,12 +358,20 @@
     max-height: 75vh;
     object-fit: contain;
     display: block;
-    pointer-events: none;
+    /*pointer-events: none; Removed to test Zoom*/
     user-select: none;
     -webkit-user-drag: none;
     border-radius: 2px;
+	  /*Added for Zoom Gallery */
+	cursor: grab;
+    transition: transform 0.1s ease;
+    touch-action: none; /* REQUIRED for pinch zoom */
   }
-
+	 /*Added for Zoom Gallery */
+.lightbox-img.zoomed {
+  cursor: grab;
+}
+	
   .lightbox-caption {
     margin-top: 1.2rem;
     text-align: center;
@@ -402,7 +410,7 @@
     pointer-events: none;
     opacity: 0.3;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: white;
     letter-spacing: 0.3em;
     transform: rotate(-30deg);
@@ -1070,7 +1078,7 @@
     <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
     <div style="position:relative;">
       <img class="lightbox-img" id="lightboxImg" src="" alt="">
-      <div class="lightbox-watermark">LAUREN'S WILDLIFE</div>
+      <div class="lightbox-watermark"><b>LAUREN'S WILDLIFE</b></div>
     </div>
     <div class="lightbox-caption">
       <div class="title" id="lightboxTitle"></div>
@@ -1158,6 +1166,10 @@
     lbImg.src = item.dataset.src;
     lbTitle.textContent = item.dataset.title || '';
     lbMedium.textContent = item.dataset.medium || '';
+	//Added for Zoom on Gallery
+    	lbImg.style.transform = 'scale(1)';
+		lbImg.classList.remove('zoomed');
+		zoomed = false;
   }
 
   document.querySelectorAll('.gallery-item').forEach((item, _, arr) => {
@@ -1193,7 +1205,35 @@
     if (e.key === 'Escape') { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
     if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length; showSlide(currentIndex); }
     if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentItems.length; showSlide(currentIndex); }
-  });
+
+	  
+	//Added for Zoom on Gallery
+		const lbImage = document.getElementById('lightboxImg');
+
+		let zoomed = false;
+		let scale = 1;
+		let originX = 50;
+		let originY = 50;
+
+		lbImage.addEventListener('click', (e) => {
+ 		zoomed = !zoomed;
+
+	  		if (zoomed) {
+	  		  scale = 2; // zoom level (adjust this)
+		      lbImage.classList.add('zoomed');
+
+		    const rect = lbImage.getBoundingClientRect();
+		    originX = ((e.clientX - rect.left) / rect.width) * 100;
+		    originY = ((e.clientY - rect.top) / rect.height) * 100;
+
+		    lbImage.style.transformOrigin = `${originX}% ${originY}%`;
+		    lbImage.style.transform = `scale(${scale})`;
+		  } else {
+		    lbImage.classList.remove('zoomed');
+		    lbImage.style.transform = 'scale(1)';
+		    lbImage.style.transformOrigin = 'center';
+		  }
+	  });
 
   // File upload display
   function handleFiles(input) {
