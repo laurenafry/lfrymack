@@ -231,14 +231,14 @@
   
   /* PAGE HEADER */
   .page-header {
-    padding: 8rem 4rem 4rem;
+    padding: 6rem 4rem 2rem;
     text-align: center;
     background: var(--cream);
     border-bottom: 1px solid var(--sand);
   }
   .page-header .eyebrow { font-size: 1rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--rust); margin-bottom: 1.2rem; }
-  .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5vw, 5rem); font-weight: 300; color: var(--moss); line-height: 1.1; }
-  .page-header p { font-size: 0.9rem; color: #6a6460; margin-top: 1.2rem; line-height: 1.8; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 3.5vw, 4rem); font-weight: 500; color: var(--moss); line-height: 1.1; }
+  .page-header p { font-size: 0.9rem; color: #6a6460; margin-top: 1.2rem; line-height: 1.8; margin-left: auto; margin-right: auto; }
 
   /* SECTION NAV */
   .section-nav {
@@ -268,7 +268,7 @@
   .section-nav a.active { opacity: 1; color: var(--rust); border-bottom-color: var(--rust); }
 
   /* GALLERY SECTION */
-  .gallery-section { padding: 5rem 5rem; }
+  .gallery-section { padding: 2.5rem 5rem; }
   .gallery-section + .gallery-section { border-top: 1px solid var(--sand); }
 
   .gallery-section-header { margin-bottom: 3rem; }
@@ -701,7 +701,7 @@
 <!-- PAGE HEADER -->
 <div class="page-header">
   <p class="eyebrow">Portfolio & Commissions</p>
-  <h1>The Work</h1>
+  <h1>My Work</h1>
   <p>A selection of original paintings, miniature sculptures, and past commission work.</p>
 </div>
 
@@ -715,7 +715,7 @@
 
 <!-- PAINTINGS -->
 <section class="gallery-section" id="paintings">
-  <div class="gallery-section-header reveal">
+  <div class="gallery-section-header reveal" style="margin-bottom:1.5rem">
     <p class="label">Original Works</p>
     <h2>Paintings</h2>
     <p>Acrylic and watercolor works inspired by wildlife, botanicals, and the Colorado landscape.</p>
@@ -724,7 +724,7 @@
   <div class="gallery-grid" id="paintings-grid">
 
     <div class="gallery-item reveal" data-title="Cheetah Portrait" data-medium="Watercolor" data-desc="Original available for purchase, Prints coming soon!" data-src="images/Full/CheetahPainting_Watercolor.png">
-      <img src="images/Thumbs/LFM_Thumbnail_CheetahPortrait.jpeg" alt="Cheetah Portrait - Lauren Fry Mackie" loading="lazy">
+      <img src="images/Thumbs/LFM_Thumbnail_CheetahPortrait.jpeg" alt="Cheetah Portrait" loading="lazy">
       <div class="gallery-item-overlay">
         <div>
           <div class="item-title">Cheetah Portrait</div>
@@ -734,43 +734,80 @@
       </div>
     </div>
 
-    <div class="gallery-item reveal" data-title="Jaguar Portrait - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/Jaguar_Watercolor.png">
-      <img src="images/Thumbs/LFM_Thumbnail_JaguarPortrait.jpeg" alt="Jaguar Portrait - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Jaguar Portrait" data-medium="Watercolor" data-src="images/Full/Jaguar_Watercolor.png">
+      <img src="images/Thumbs/LFM_Thumbnail_JaguarPortrait.jpeg" alt="Jaguar Portrait" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Jaguar Portrait</div><div class="item-medium">Watercolor</div></div>
       </div>
     </div>
 
-    <div class="gallery-item reveal" data-title="Slope in Spring - Lauren Fry Mackie" data-medium="Acrylic" data-src="images/Full/LFM_SlopeInSpring_Acrylic.png">
-      <img src="images/Thumbs/LFM_Thumbnail_SlopeInSpring.jpeg" alt="Slope in Spring - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Slope in Spring" data-medium="Acrylic" data-src="images/Full/LFM_SlopeInSpring_Acrylic.png">
+      <img src="images/Thumbs/LFM_Thumbnail_SlopeInSpring.jpeg" alt="Slope in Spring" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Slope in Spring</div><div class="item-medium">Acrylic</div></div>
       </div>
     </div>
 
-    <div class="gallery-item reveal" data-title="Isle of Skye - Lauren Fry Mackie" data-medium="Acrylic" data-src="images/Full/LaurenFryMackie_IsleofSkye_Acrylic.png">
-      <img src="images/Thumbs/LFM_Thumbnail_IsleOfSkye.jpeg" alt="Isle of Skye - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Isle of Skye" data-medium="Acrylic" data-src="images/Full/LaurenFryMackie_IsleofSkye_Acrylic.png">
+      <img src="images/Thumbs/LFM_Thumbnail_IsleOfSkye.jpeg" alt="Isle of Skye" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Isle of Skye</div><div class="item-medium">Acrylic</div></div>
       </div>
     </div>
 
-    <div class="gallery-item reveal" data-title="Jaguar in Tree - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/LaurenFryMackie_Jaguar in tree_Watercolor.png">
-      <img src="images/Thumbs/LFM_Thumbnail_JaguarInTree.jpeg" alt="Jaguar in Tree - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Jaguar in Tree" data-medium="Watercolor" data-src="images/Full/LaurenFryMackie_Jaguar in tree_Watercolor.png">
+      <img src="images/Thumbs/LFM_Thumbnail_JaguarInTree.jpeg" alt="Jaguar in Tree" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Jaguar in Tree</div><div class="item-medium">Watercolor</div></div>
       </div>
     </div>
+
+
+	  
+	<div class="gallery-item reveal" data-title="Feeling Froggy" data-medium="Watercolor" data-desc="Original available for purchase, Prints coming soon!" data-src="images/Full/LaurenFryMackie_Frog_Watercolor.jpg">
+      <img src="images/Thumbs/LFM_Thumbnail_Frog.jpg" alt="Feeling Froggy" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div>
+          <div class="item-title">Feeling Froggy</div>
+          <div class="item-medium">Watercolor</div>
+          <div class="item-desc">Original available for purchase, Prints coming soon!</div>
+        </div>
+      </div>
+    </div>  
+
+	<div class="gallery-item reveal" data-title="Old Man of Storr - Isle of Skye" data-medium="Acrylic" data-desc="" data-src="images/Full/LaurenFryMackie_OldManStorr_Acrylic.jpg">
+      <img src="images/Thumbs/LFM_Thumbnail_OldManStorr.jpg" alt="Cheetah Portrait" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div>
+          <div class="item-title">Old Man of Storr</div>
+          <div class="item-medium">Acrylic</div>
+          <div class="item-desc"></div>
+        </div>
+      </div>
+    </div>
+
+	<div class="gallery-item reveal" data-title="A Fox's Cuppa" data-medium="Watercolor" data-desc="" data-src="images/Full/LaurenFryMackie_FoxPortrait_Watercolor.jpg">
+      <img src="images/Thumbs/LFM_Thumbnail_FoxPortrait.jpg" alt="Cheetah Portrait" loading="lazy">
+      <div class="gallery-item-overlay">
+        <div>
+          <div class="item-title">A Fox's Cuppa</div>
+          <div class="item-medium">Watercolor</div>
+          <div class="item-desc"></div>
+        </div>
+      </div>
+    </div>  
+
+	  
     
-    <div class="gallery-item reveal" data-title="Dapper Prairie Dog - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/LaurenFryMackie_DapperPrairieDog_Watercolor.png">
-      <img src="images/Thumbs/LaurenFryMackie_DapperPrairieDog_Watercolor.jpeg" alt="Dapper Prairie Dog - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Dapper Prairie Dog" data-medium="Watercolor" data-src="images/Full/LaurenFryMackie_DapperPrairieDog_Watercolor.png">
+      <img src="images/Thumbs/LaurenFryMackie_DapperPrairieDog_Watercolor.jpeg" alt="Dapper Prairie Dog" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Dapper Prairie Dog</div><div class="item-medium">Watercolor</div></div>
       </div>
     </div>
     
-    <div class="gallery-item reveal" data-title="Highland Coo - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/LaurenFryMackie_HighlandCoo_Watercolor.JPEG">
-      <img src="images/Thumbs/LFM_Thumbnail_HighlandCoo.jpeg" alt="Highland Coo - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Highland Coo" data-medium="Watercolor" data-src="images/Full/LaurenFryMackie_HighlandCoo_Watercolor.JPEG">
+      <img src="images/Thumbs/LFM_Thumbnail_HighlandCoo.jpeg" alt="Highland Coo" loading="lazy">
       <div class="gallery-item-overlay">
         <div>
           <div class="item-title">Highland Coo</div>
@@ -800,120 +837,120 @@
   </div>
   <div class="gallery-grid" id="miniatures-grid">
    
-    <div class="gallery-item reveal" data-title="Penguin in Walnut - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Penguin Walnut.png">
-      <img src="images/Thumbs/LFM_Thumbnail_PenguinWalnut.jpeg" alt="Penguin in Walnut - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Penguin in Walnut" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Penguin Walnut.png">
+      <img src="images/Thumbs/LFM_Thumbnail_PenguinWalnut.jpeg" alt="Penguin in Walnut" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Penguin in Walnut</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
    
-    <div class="gallery-item reveal" data-title="Squirrel on Acorn - Lauren Fry Mackie" data-medium="Acrylic on Acorn" data-src="images/Full/LaurenFryMackie_Squirrel Acorn.png">
-      <img src="images/Thumbs/LFM_Thumbnail_SquirrelAcorn.jpeg" alt="Squirrel on Acorn - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Squirrel on Acorn" data-medium="Acrylic on Acorn" data-src="images/Full/LaurenFryMackie_Squirrel Acorn.png">
+      <img src="images/Thumbs/LFM_Thumbnail_SquirrelAcorn.jpeg" alt="Squirrel on Acorn" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Squirrel on Acorn</div><div class="item-medium">Acrylic on Acorn</div></div>
       </div>
     </div>
    
-    <div class="gallery-item reveal" data-title="House in Walnut Woods - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Hinged Walnut House.png">
-      <img src="images/Thumbs/LFM_Thumbnail_HingedWalnutHouse.jpeg" alt="House in Walnut Woods - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="House in Walnut Woods" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Hinged Walnut House.png">
+      <img src="images/Thumbs/LFM_Thumbnail_HingedWalnutHouse.jpeg" alt="House in Walnut Woods" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">House in Walnut Woods</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
 
-     <div class="gallery-item reveal" data-title="Puffin Walnut - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Puffin Walnut.png">
-      <img src="images/Thumbs/LFM_Thumbnail_PuffinWalnut.jpeg" alt="Puffin Walnut - Lauren Fry Mackie" loading="lazy">
+     <div class="gallery-item reveal" data-title="Puffin Walnut" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Puffin Walnut.png">
+      <img src="images/Thumbs/LFM_Thumbnail_PuffinWalnut.jpeg" alt="Puffin Walnut" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Puffin Walnut</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
    
-    <div class="gallery-item reveal" data-title="Owl on Acorn - Lauren Fry Mackie" data-medium="Acrylic on Acorn" data-src="images/Full/LaurenFryMackie_Owl Acorn.png">
-      <img src="images/Thumbs/LFM_Thumbnail_OwlAcorn.jpeg" alt="Owl on Acorn - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Owl on Acorn" data-medium="Acrylic on Acorn" data-src="images/Full/LaurenFryMackie_Owl Acorn.png">
+      <img src="images/Thumbs/LFM_Thumbnail_OwlAcorn.jpeg" alt="Owl on Acorn" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">"Owl on Acorn</div><div class="item-medium">Acrylic on Acorn</div></div>
       </div>
     </div>
 
-    <div class="gallery-item reveal" data-title="Owl Portrait on Acorn - Lauren Fry Mackie" data-medium="Acrylic on Acorn" data-src="images/Full/LaurenFryMackie_Owl Face Acorn.png">
-      <img src="images/Thumbs/LFM_Thumbnail_OwlPortraitAcorn.jpeg" alt="Owl Portrait on Acorn - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Owl Portrait on Acorn" data-medium="Acrylic on Acorn" data-src="images/Full/LaurenFryMackie_Owl Face Acorn.png">
+      <img src="images/Thumbs/LFM_Thumbnail_OwlPortraitAcorn.jpeg" alt="Owl Portrait on Acorn" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Owl Portrait on Acorn</div><div class="item-medium">Acrylic on Acorn</div></div>
       </div>
     </div>
        
-     <div class="gallery-item reveal" data-title="Squirrel in Walnut - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Squirrel Walnut.png">
-      <img src="images/Thumbs/LFM_Thumbnail_SquirrelWalnut.jpeg" alt="Squirrel in Walnut - Lauren Fry Mackie" loading="lazy">
+     <div class="gallery-item reveal" data-title="Squirrel in Walnut" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Squirrel Walnut.png">
+      <img src="images/Thumbs/LFM_Thumbnail_SquirrelWalnut.jpeg" alt="Squirrel in Walnut" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Squirrel in Walnut</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
 
-     <div class="gallery-item reveal" data-title="Badger in Walnut - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Badger Walnut.png">
-      <img src="images/Thumbs/LFM_Thumbnail_BadgerWalnut.jpeg" alt="Badger in Walnut - Lauren Fry Mackie" loading="lazy">
+     <div class="gallery-item reveal" data-title="Badger in Walnut" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Badger Walnut.png">
+      <img src="images/Thumbs/LFM_Thumbnail_BadgerWalnut.jpeg" alt="Badger in Walnut" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Badger in Walnut</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
 
-    <div class="gallery-item reveal" data-title="Fishing Bear Walnut - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Fishing Bear Walnut.png">
-      <img src="images/Thumbs/LFM_Thumbnail_FishingBearWalnut.jpeg" alt="Fishing Bear Walnut - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Fishing Bear Walnut" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Fishing Bear Walnut.png">
+      <img src="images/Thumbs/LFM_Thumbnail_FishingBearWalnut.jpeg" alt="Fishing Bear Walnut" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Fishing Bear Walnut</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
 
-     <div class="gallery-item reveal" data-title="Stone Cabin Walnut - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Stone Cabin Walnut cropped.png">
-      <img src="images/Thumbs/LFM_Thumbnail_StoneCabinWalnut.jpeg" alt="Stone Cabin Walnut - Lauren Fry Mackie" loading="lazy">
+     <div class="gallery-item reveal" data-title="Stone Cabin Walnut" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Stone Cabin Walnut cropped.png">
+      <img src="images/Thumbs/LFM_Thumbnail_StoneCabinWalnut.jpeg" alt="Stone Cabin Walnut" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Stone Cabin Walnut</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
 
-     <div class="gallery-item reveal" data-title="Nessie Walnut - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Nessie Walnut.png">
-      <img src="images/Thumbs/LFM_Thumbnail_NessieWalnut.jpeg" alt="Nessie Walnut - Lauren Fry Mackie" loading="lazy">
+     <div class="gallery-item reveal" data-title="Nessie Walnut" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Nessie Walnut.png">
+      <img src="images/Thumbs/LFM_Thumbnail_NessieWalnut.jpeg" alt="Nessie Walnut" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Nessie Walnut</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
 
-     <div class="gallery-item reveal" data-title="Otter with Gift - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_COtter.JPEG">
-      <img src="images/Thumbs/LFM_Thumbnail_Otter.jpeg" alt="Otter with Gift - Lauren Fry Mackie" loading="lazy">
+     <div class="gallery-item reveal" data-title="Otter with Gift" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_COtter.JPEG">
+      <img src="images/Thumbs/LFM_Thumbnail_Otter.jpeg" alt="Otter with Gift" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Otter with Gift</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
 
     <div class="gallery-item reveal" data-title="Wine Cork Stone Castle Plant Stake- Lauren Fry Mackie" data-medium="Mixed Media" data-src="images/Full/LaurenFryMackie_Wine Cork Stone Castle.png">
-      <img src="images/Thumbs/LFM_Thumbnail_StoneCastleStake.jpeg" alt="Wine Cork Stone Castle Plant Stake - Lauren Fry Mackie" loading="lazy">
+      <img src="images/Thumbs/LFM_Thumbnail_StoneCastleStake.jpeg" alt="Wine Cork Stone Castle Plant Stake" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Wine Cork Stone Castle Plant Stake</div><div class="item-medium">Mixed Media</div></div>
       </div>
     </div>
 
-    <div class="gallery-item reveal" data-title="Racoon Sledding - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Racoon Sledding.png">
-      <img src="images/Thumbs/LFM_Thumbnail_RacoonSled.jpeg" alt="Racoon Sledding - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Racoon Sledding" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Racoon Sledding.png">
+      <img src="images/Thumbs/LFM_Thumbnail_RacoonSled.jpeg" alt="Racoon Sledding" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Racoon Sledding</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
 
-	<div class="gallery-item reveal" data-title="Lemur - Lauren Fry Mackie" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Lemur.png">
-      <img src="images/Thumbs/LFM_Thumbnail_Lemur.jpeg" alt="Lemur - Lauren Fry Mackie" loading="lazy">
+	<div class="gallery-item reveal" data-title="Lemur" data-medium="Clay Sculpture" data-src="images/Full/LaurenFryMackie_Lemur.png">
+      <img src="images/Thumbs/LFM_Thumbnail_Lemur.jpeg" alt="Lemur" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Lemur</div><div class="item-medium">Clay Sculpture</div></div>
       </div>
     </div>
 
 	<div class="gallery-item reveal" data-title="Cabin Plant Stake- Lauren Fry Mackie" data-medium="Mixed Media" data-src="images/Thumbs/LFM_Thumbnail_CabinStake.jpeg">
-      <img src="images/Thumbs/LFM_Thumbnail_CabinStake.jpeg" alt="Cabin Plant Stake - Lauren Fry Mackie" loading="lazy">
+      <img src="images/Thumbs/LFM_Thumbnail_CabinStake.jpeg" alt="Cabin Plant Stake" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Wine Cork Cabin Plant Stake</div><div class="item-medium">Mixed Media</div></div>
       </div>
     </div>
 
 	<div class="gallery-item reveal" data-title="Wine Cork Cottage Plant Stake- Lauren Fry Mackie" data-medium="Mixed Media" data-src="images/Thumbs/LFM_Thumbnail_CottageStake.jpeg">
-      <img src="images/Thumbs/LFM_Thumbnail_CottageStake.jpeg" alt="Wine Cork Cottage Plant Stake - Lauren Fry Mackie" loading="lazy">
+      <img src="images/Thumbs/LFM_Thumbnail_CottageStake.jpeg" alt="Wine Cork Cottage Plant Stake" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Wine Cork Cottage Plant Stake</div><div class="item-medium">Mixed Media</div></div>
       </div>
