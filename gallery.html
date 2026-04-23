@@ -353,25 +353,24 @@
   }
   .lightbox.open .lightbox-inner { transform: scale(1); }
 
+  /*added 4.23*/
   .lightbox-img {
     max-width: 100%;
     max-height: 75vh;
     object-fit: contain;
     display: block;
-    /*pointer-events: none; Removed to test Zoom*/
+    cursor: grab;
+    transition: transform 0.3s ease;
     user-select: none;
     -webkit-user-drag: none;
     border-radius: 2px;
-	  /*Added for Zoom Gallery */
-	cursor: grab;
-    transition: transform 0.1s ease;
-    touch-action: none; /* REQUIRED for pinch zoom */
   }
-	 /*Added for Zoom Gallery */
-.lightbox-img.zoomed {
-  cursor: grab;
-}
-	
+
+    /*added 4.23*/
+  .lightbox-img.dragging {
+    cursor: grabbing;
+  }
+  
   .lightbox-caption {
     margin-top: 1.2rem;
     text-align: center;
@@ -410,7 +409,7 @@
     pointer-events: none;
     opacity: 0.3;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: white;
     letter-spacing: 0.3em;
     transform: rotate(-30deg);
@@ -709,10 +708,9 @@
     <p>Acrylic and watercolor works inspired by wildlife, botanicals, and the Colorado landscape.</p>
   </div>
   <div class="gallery-grid" id="paintings-grid">
-    <!-- Replace src with your actual image paths, e.g. src="images/painting1.jpg" -->
-    <!-- Example item structure — duplicate and fill in your own images & titles -->
-    <div class="gallery-item reveal" data-title="Cheetah Portrait - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/CheetahPainting_Watercolor.png">
-      <img src="images/Thumbs/LFM_Thumbnail_CheetahPortrait.jpeg" alt="Cheetah Portrait - Lauren Fry Mackie" loading="lazy">
+
+    <div class="gallery-item reveal" data-title="Cheetah Portrait - Lauren Fry Mackie" data-medium="Watercolor" data-src="https://raw.githubusercontent.com/laurenafry/lfrymack/ec2db7c9484bfe9d0aa52cfe93375ead770fdc6a/images/Thumbs/LFM_Thumbnail_CheetahPortrait.jpeg">
+      <img src="https://raw.githubusercontent.com/laurenafry/lfrymack/ec2db7c9484bfe9d0aa52cfe93375ead770fdc6a/images/Thumbs/LFM_Thumbnail_CheetahPortrait.jpeg" alt="Cheetah Portrait - Lauren Fry Mackie" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Cheetah Portrait</div><div class="item-medium">Watercolor</div></div>
       </div>
@@ -1078,7 +1076,7 @@
     <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
     <div style="position:relative;">
       <img class="lightbox-img" id="lightboxImg" src="" alt="">
-      <div class="lightbox-watermark"><b>LAUREN'S WILDLIFE</b></div>
+      <div class="lightbox-watermark">LAUREN'S WILDLIFE</div>
     </div>
     <div class="lightbox-caption">
       <div class="title" id="lightboxTitle"></div>
@@ -1141,11 +1139,13 @@
   }
   animRing();
 
+  
   // Disable right-click on images
   document.addEventListener('contextmenu', e => {
     if (e.target.tagName === 'IMG') e.preventDefault();
   });
 
+  
   // Lightbox
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightboxImg');
@@ -1161,15 +1161,16 @@
     document.body.style.overflow = 'hidden';
   }
 
+  //added 4.23
   function showSlide(i) {
     const item = currentItems[i];
     lbImg.src = item.dataset.src;
     lbTitle.textContent = item.dataset.title || '';
     lbMedium.textContent = item.dataset.medium || '';
-	//Added for Zoom on Gallery
-    	lbImg.style.transform = 'scale(1)';
-		lbImg.classList.remove('zoomed');
-		zoomed = false;
+  
+    // reset zoom properly
+    scale = 1;
+    resetZoom();
   }
 
   document.querySelectorAll('.gallery-item').forEach((item, _, arr) => {
@@ -1205,36 +1206,162 @@
     if (e.key === 'Escape') { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
     if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length; showSlide(currentIndex); }
     if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentItems.length; showSlide(currentIndex); }
+  });
 
-	  
-	//Added for Zoom on Gallery
-		const lbImage = document.getElementById('lightboxImg');
 
-		let zoomed = false;
-		let scale = 1;
-		let originX = 50;
-		let originY = 50;
 
-		lbImage.addEventListener('click', (e) => {
- 		zoomed = !zoomed;
+  
+  // =======================
+// ZOOM + PAN SYSTEM
+// =======================
 
-	  		if (zoomed) {
-	  		  scale = 2; // zoom level (adjust this)
-		      lbImage.classList.add('zoomed');
+let scale = 1;
+let translateX = 0;
+let translateY = 0;
 
-		    const rect = lbImage.getBoundingClientRect();
-		    originX = ((e.clientX - rect.left) / rect.width) * 100;
-		    originY = ((e.clientY - rect.top) / rect.height) * 100;
+let isDragging = false;
+let startX = 0;
+let startY = 0;
 
-		    lbImage.style.transformOrigin = `${originX}% ${originY}%`;
-		    lbImage.style.transform = `scale(${scale})`;
-		  } else {
-		    lbImage.classList.remove('zoomed');
-		    lbImage.style.transform = 'scale(1)';
-		    lbImage.style.transformOrigin = 'center';
-		  }
-	  });
+// Helper: apply transform
+function updateTransform() {
+  lbImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+}
 
+// Helper: constrain panning so image stays in view
+function clampPan() {
+  const rect = lbImg.getBoundingClientRect();
+  const container = document.querySelector('.lightbox-inner').getBoundingClientRect();
+
+  const maxX = (rect.width - container.width) / 2;
+  const maxY = (rect.height - container.height) / 2;
+
+  translateX = Math.min(Math.max(translateX, -maxX), maxX);
+  translateY = Math.min(Math.max(translateY, -maxY), maxY);
+}
+
+
+// =======================
+// DESKTOP: SCROLL ZOOM
+// =======================
+
+lbImg.addEventListener('wheel', (e) => {
+  e.preventDefault();
+
+  const zoomIntensity = 0.0015;
+  scale += e.deltaY * -zoomIntensity;
+
+  scale = Math.min(Math.max(1, scale), 4);
+
+  clampPan();
+  updateTransform();
+});
+
+
+// =======================
+// MOBILE: PINCH ZOOM
+// =======================
+
+let initialDistance = null;
+let startScale = 1;
+
+lbImg.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 2) {
+    initialDistance = getDistance(e.touches);
+    startScale = scale;
+  }
+
+  // drag start (single finger)
+  if (e.touches.length === 1 && scale > 1) {
+    isDragging = true;
+    startX = e.touches[0].clientX - translateX;
+    startY = e.touches[0].clientY - translateY;
+  }
+});
+
+lbImg.addEventListener('touchmove', (e) => {
+  // pinch zoom
+  if (e.touches.length === 2 && initialDistance) {
+    e.preventDefault();
+
+    const newDistance = getDistance(e.touches);
+    const zoomFactor = newDistance / initialDistance;
+
+    scale = Math.min(Math.max(startScale * zoomFactor, 1), 4);
+
+    clampPan();
+    updateTransform();
+  }
+
+  // drag pan
+  if (e.touches.length === 1 && isDragging && scale > 1) {
+    translateX = e.touches[0].clientX - startX;
+    translateY = e.touches[0].clientY - startY;
+
+    clampPan();
+    updateTransform();
+  }
+});
+
+lbImg.addEventListener('touchend', (e) => {
+  if (e.touches.length < 2) {
+    initialDistance = null;
+  }
+  isDragging = false;
+});
+
+function getDistance(touches) {
+  const dx = touches[0].clientX - touches[1].clientX;
+  const dy = touches[0].clientY - touches[1].clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+
+// =======================
+// DESKTOP: DRAG PAN
+// =======================
+
+lbImg.addEventListener('mousedown', (e) => {
+  if (scale <= 1) return;
+
+  isDragging = true;
+  lbImg.classList.add('dragging');
+
+  startX = e.clientX - translateX;
+  startY = e.clientY - translateY;
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+
+  translateX = e.clientX - startX;
+  translateY = e.clientY - startY;
+
+  clampPan();
+  updateTransform();
+});
+
+document.addEventListener('mouseup', () => {
+  isDragging = false;
+  lbImg.classList.remove('dragging');
+});
+
+
+// =======================
+// RESET ON IMAGE CHANGE
+// =======================
+
+function resetZoom() {
+  scale = 1;
+  translateX = 0;
+  translateY = 0;
+  updateTransform();
+}
+  
+
+
+  
+  
   // File upload display
   function handleFiles(input) {
     const list = document.getElementById('fileList');
@@ -1248,7 +1375,6 @@
   }
 
  
-
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
@@ -1256,6 +1382,7 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => obs.observe(el));
 
+  
   // Active section nav highlight
   const sections = document.querySelectorAll('section[id], div[id]');
   const navLinks = document.querySelectorAll('.section-nav a');
