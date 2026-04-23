@@ -317,6 +317,12 @@
   .item-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); font-style: italic; }
   .item-medium { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); margin-top: 0.2rem; }
 
+  .item-desc { 
+  font-size: 0.75rem; 
+  color: var(--cream);
+  margin-top: 0.15rem; 
+}
+
   /* Placeholder items */
   .gallery-placeholder {
     background: var(--sand);
@@ -372,11 +378,18 @@
   }
   
   .lightbox-caption {
-    margin-top: 1.2rem;
+    margin-top: .5rem;
     text-align: center;
   }
   .lightbox-caption .title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--cream); }
-  .lightbox-caption .medium { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-top: 0.3rem; }
+  .lightbox-caption .medium { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-top: 0.2rem; }
+  
+   .lightbox-caption .desc {
+    font-size: 0.75rem;  
+    color: var(--cream);
+    margin-top: 0.1rem;     
+  }
+
 
   .lightbox-close {
     position: absolute; top: -3rem; right: 0;
@@ -707,56 +720,71 @@
     <h2>Paintings</h2>
     <p>Acrylic and watercolor works inspired by wildlife, botanicals, and the Colorado landscape.</p>
   </div>
+  
   <div class="gallery-grid" id="paintings-grid">
 
-    <div class="gallery-item reveal" data-title="Cheetah Portrait - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/CheetahPainting_Watercolor.png">
-      <img src="images/Thumbs/LFM_Thumbnail_JaguarPortrait.jpeg"  alt="Cheetah Portrait - Lauren Fry Mackie" loading="lazy">
+    <div class="gallery-item reveal" data-title="Cheetah Portrait" data-medium="Watercolor" data-desc="Original available for purchase, Prints coming soon!" data-src="images/Full/CheetahPainting_Watercolor.png">
+      <img src="images/Thumbs/LFM_Thumbnail_CheetahPortrait.jpeg" alt="Cheetah Portrait - Lauren Fry Mackie" loading="lazy">
       <div class="gallery-item-overlay">
-        <div><div class="item-title">Cheetah Portrait</div><div class="item-medium">Watercolor</div></div>
+        <div>
+          <div class="item-title">Cheetah Portrait</div>
+          <div class="item-medium">Watercolor</div>
+          <div class="item-desc">Original available for purchase, Prints coming soon!</div>
+        </div>
       </div>
     </div>
+
     <div class="gallery-item reveal" data-title="Jaguar Portrait - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/Jaguar_Watercolor.png">
       <img src="images/Thumbs/LFM_Thumbnail_JaguarPortrait.jpeg" alt="Jaguar Portrait - Lauren Fry Mackie" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Jaguar Portrait</div><div class="item-medium">Watercolor</div></div>
       </div>
     </div>
+
     <div class="gallery-item reveal" data-title="Slope in Spring - Lauren Fry Mackie" data-medium="Acrylic" data-src="images/Full/LFM_SlopeInSpring_Acrylic.png">
       <img src="images/Thumbs/LFM_Thumbnail_SlopeInSpring.jpeg" alt="Slope in Spring - Lauren Fry Mackie" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Slope in Spring</div><div class="item-medium">Acrylic</div></div>
       </div>
     </div>
+
     <div class="gallery-item reveal" data-title="Isle of Skye - Lauren Fry Mackie" data-medium="Acrylic" data-src="images/Full/LaurenFryMackie_IsleofSkye_Acrylic.png">
       <img src="images/Thumbs/LFM_Thumbnail_IsleOfSkye.jpeg" alt="Isle of Skye - Lauren Fry Mackie" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Isle of Skye</div><div class="item-medium">Acrylic</div></div>
       </div>
     </div>
-       <div class="gallery-item reveal" data-title="Jaguar in Tree - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/LaurenFryMackie_Jaguar in tree_Watercolor.png">
+
+    <div class="gallery-item reveal" data-title="Jaguar in Tree - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/LaurenFryMackie_Jaguar in tree_Watercolor.png">
       <img src="images/Thumbs/LFM_Thumbnail_JaguarInTree.jpeg" alt="Jaguar in Tree - Lauren Fry Mackie" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Jaguar in Tree</div><div class="item-medium">Watercolor</div></div>
       </div>
     </div>
+    
     <div class="gallery-item reveal" data-title="Dapper Prairie Dog - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/LaurenFryMackie_DapperPrairieDog_Watercolor.png">
       <img src="images/Thumbs/LaurenFryMackie_DapperPrairieDog_Watercolor.jpeg" alt="Dapper Prairie Dog - Lauren Fry Mackie" loading="lazy">
       <div class="gallery-item-overlay">
         <div><div class="item-title">Dapper Prairie Dog</div><div class="item-medium">Watercolor</div></div>
       </div>
     </div>
+    
     <div class="gallery-item reveal" data-title="Highland Coo - Lauren Fry Mackie" data-medium="Watercolor" data-src="images/Full/LaurenFryMackie_HighlandCoo_Watercolor.JPEG">
       <img src="images/Thumbs/LFM_Thumbnail_HighlandCoo.jpeg" alt="Highland Coo - Lauren Fry Mackie" loading="lazy">
       <div class="gallery-item-overlay">
-        <div><div class="item-title">Highland Coo</div><div class="item-medium">Watercolor</div></div>
-      </div>
+        <div>
+          <div class="item-title">Highland Coo</div>
+          <div class="item-medium">Watercolor</div>
+        </div>
+      </div>    
     </div>
+    
     <!-- Add more gallery-item divs as needed
     <div class="gallery-placeholder reveal">
       <div class="placeholder-icon">🖼</div>
       <div class="placeholder-text">Add more paintings</div> -->
     </div>
-  </div>
+  
 </section>
 
 <!-- MINIATURES -->
@@ -1081,6 +1109,7 @@
     <div class="lightbox-caption">
       <div class="title" id="lightboxTitle"></div>
       <div class="medium" id="lightboxMedium"></div>
+      <div class="desc" id="lightboxDesc"></div>
     </div>
   </div>
 </div>
@@ -1151,6 +1180,7 @@
   const lbImg = document.getElementById('lightboxImg');
   const lbTitle = document.getElementById('lightboxTitle');
   const lbMedium = document.getElementById('lightboxMedium');
+  const lbDesc = document.getElementById('lightboxDesc');
   let currentItems = [], currentIndex = 0;
 
   function openLightbox(items, index) {
@@ -1167,6 +1197,7 @@
     lbImg.src = item.dataset.src;
     lbTitle.textContent = item.dataset.title || '';
     lbMedium.textContent = item.dataset.medium || '';
+    lbDesc.textContent = item.dataset.desc || '';
   
     // reset zoom properly
     scale = 1;
