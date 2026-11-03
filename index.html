@@ -372,7 +372,7 @@
 	 padding: 1rem;
     background: var(--clay);
     background-image: radial-gradient(#e8dfc8, #c4956a);
-    color: var(--cream);
+    color: var(--moss);
     overflow: hidden;
  }	
 /* Announcement text column */
@@ -384,13 +384,21 @@
     font-size: 0.85rem;
     line-height: 1.8;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
     white-space: normal;
   }
   .announcement-inner span {
     margin: 0 1rem;
     opacity: 0.85;
   }
+ .announcement-inner h2 {
+    color:var(--moss);
+	 font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: .7rem;"
+  }
+	
 /* Announcement images */
   .announcement-img {
 	position: relative;
@@ -1541,7 +1549,7 @@
 <section class="announcement">
 	<!-- Column 1: Announcement Text -->
 	<div class="announcement-inner">
-		 <span>Upcoming Shows: My work <i>Squirrel on Acorn</i></a> will be featured at <a href="https://www.thelabonsantafe.com/" target="_blank">The Lab on Santa Fe</a> in Denver during the month of January as part of the exhibition MICROCOSM: The Universe in the Smallest Things. Mark your calendars for 5:30–9:30 PM January 1st, 2027 for the First Friday Art Walk & Exhibition Opening!</span>
+		 <span><h2>Upcoming Shows</h2>My piece <i>Squirrel on Acorn</i></a> will be featured at <a href="https://www.thelabonsantafe.com/" target="_blank" style="color:var(--moss);text-decoration:underline;">The Lab on Santa Fe</a> in Denver during the month of January as part of the exhibition MICROCOSM: The Universe in the Smallest Things. Mark your calendars for 5:30–9:30 PM January 1st, 2027 for the First Friday Art Walk & Exhibition Opening!</span>
 	  </div>
 	
 	  <div class="announcement-img reveal" data-title="Squirrel on Acorn" data-medium="Acrylic on Foraged Acorn" data-desc="A squirrel, no bigger than a thumbnail painted onto the surface of a real acorn. The very thing it would eat, may bury and forget, that could grow into the mighty tree it lives in. A complete world in miniature, holding everything that will eventually become. Lean in. Look closer. Then think bigger." data-type="image" data-src="/images/Full/LaurenFryMackie_SquirrelonAcorn_CloseUp.jpg">
