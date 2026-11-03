@@ -365,34 +365,45 @@
 
 /* Announcement */
  .announcement {
-	 display: grid;
+	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
     min-height: 80vh;
- }	
-.announcement-strip {
+	 padding: 1rem;
     background: var(--clay);
-	background-image: radial-gradient(#e8dfc8, #c4956a);
+    background-image: radial-gradient(#e8dfc8, #c4956a);
     color: var(--cream);
-    padding: 1rem 0;
-    overflow: wrap;
-    white-space: nowrap;
-  }
-  .announcement-inner {
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
+    overflow: hidden;
+ }	
+/* Announcement text column */
+.announcement-inner {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
+    white-space: normal;
   }
-  .announcement-inner span { margin: 0 2rem; opacity: 0.7; }
+  .announcement-inner span {
+    margin: 0 1rem;
+    opacity: 0.85;
+  }
+/* Announcement images */
   .announcement-img {
 	position: relative;
     overflow: hidden;
-    max-width: 100%;     
-    display: flex; align-items: center; justify-content: center;
-    padding: .5rem;
-	cursor: none;
+	width: 100%;
+    height: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: none;
   }
-  .announcement-img img {
+  .announcement-img img, .announcement-img video {
   	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -402,8 +413,9 @@
 	user-select: none;
 	-webkit-user-drag: none;	  
   }
-  .announcement-img:hover img {transform: scale(1.04);}
-  .accouncement-img-overlay {
+  .announcement-img:hover img, .announcement-img:hover video {transform: scale(1.04);}
+  /* Image overlay */
+  .announcement-img-overlay {
 		position:absolute; 
 		inset:0;
 		background: linear-gradient(to top, rgba(28,26,23,0.7) 0%, transparent 50%);
@@ -413,14 +425,27 @@
 		align-items:flex-end;
 		padding: 1.5rem;
 	}
-  .accouncement-img:hover  .accouncement-img-overlay { opacity:1; }
-  .announcement-img-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); font-style: italic; }
-  .announcement-img-Medium { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); margin-top: 0.2rem; }
+  .accouncement-img:hover  .announcement-img-overlay { opacity:1; }
+
+	
+  .announcement-img-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    font-style: italic;
+	}
+  .announcement-img-medium {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-top: 0.2rem;
+	}
   .announcement-img-description {
-		font-size: 0.75rem; 
-  		color: var(--cream);
-  		margin-top: 0.15rem; 
-		overflow: wrap;
+    font-size: 0.75rem;
+    color: var(--cream);
+    margin-top: 0.15rem;
+    line-height: 1.5;
 	}
  /* Announcement LIGHTBOX */
   .lightbox {
@@ -1210,6 +1235,25 @@
     width: 75%; 
     height: auto;
   }
+
+
+/* Announcement */
+	.announcement {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        gap: 10px;
+    }
+
+    .announcement-inner {
+        padding: 3rem 1.5rem;
+        min-height: 250px;
+    }
+
+    .announcement-img {
+        min-height: 400px;
+        height: 400px;
+    }
+
 	
  /* ABOUT */
   .about {
@@ -1495,11 +1539,12 @@
 	
 <!-- Upcoming Show Announcement -->
 <section class="announcement">
-	<div class="announcement-strip">
-	  <div class="announcement-inner">
+	<!-- Column 1: Announcement Text -->
+	<div class="announcement-inner">
 		 <span>Upcoming Shows: My work <i>Squirrel on Acorn</i></a> will be featured at <a href="https://www.thelabonsantafe.com/" target="_blank">The Lab on Santa Fe</a> in Denver during the month of January as part of the exhibition MICROCOSM: The Universe in the Smallest Things. Mark your calendars for 5:30–9:30 PM January 1st, 2027 for the First Friday Art Walk & Exhibition Opening!</span>
 	  </div>
-	  <div class="announcement-img reveal" data-title="Squirrel on Acorn" data-medium="Acrylic on Acorn" data-src="/images/Full/LaurenFryMackie_SquirrelonAcorn_CloseUp.jpg">
+	
+	  <div class="announcement-img reveal" data-title="Squirrel on Acorn" data-medium="Acrylic on Foraged Acorn" data-desc="A squirrel, no bigger than a thumbnail painted onto the surface of a real acorn. The very thing it would eat, may bury and forget, that could grow into the mighty tree it lives in. A complete world in miniature, holding everything that will eventually become. Lean in. Look closer. Then think bigger." data-type="image" data-src="/images/Full/LaurenFryMackie_SquirrelonAcorn_CloseUp.jpg">
       	<img src="/images/Full/LaurenFryMackie_SquirrelonAcorn_CloseUp.jpg" alt="Squirrel on Acorn" loading="lazy">
 		   <div class="announcement-img-overlay">
 			   <div>
@@ -1508,9 +1553,10 @@
 				   <div class="announcement-img-description">A squirrel, no bigger than a thumbnail painted onto the surface of a real acorn. The very thing it would eat, may bury and forget, that could grow into the mighty tree it lives in. A complete world in miniature, holding everything that will eventually become. Lean in. Look closer. Then think bigger.</div>
 			   </div>
      	   </div>
-      </div>  	 
-	  <div class="announcement-img reveal" data-title="Squirrel on Acorn" data-medium="Acrylic on Acorn" data-src="/images/Full/LaurenFryMackie_SquirrelonAcorn_Video.mp4">
-      	<video autoplay muted> <source src="/images/Full/LaurenFryMackie_SquirrelonAcorn_Video" type="video/mp4" alt="Squirrel on Acorn" loading="lazy">Your browser does not support the video tag.</video>
+      </div>  
+	
+	  <div class="announcement-img reveal" data-title="Squirrel on Acorn" data-medium="Acrylic on Foraged Acorn" data-desc="A squirrel, no bigger than a thumbnail painted onto the surface of a real acorn. The very thing it would eat, may bury and forget, that could grow into the mighty tree it lives in. A complete world in miniature, holding everything that will eventually become. Lean in. Look closer. Then think bigger." data-type="video" data-src="/images/Full/LaurenFryMackie_SquirrelonAcorn_Video.mp4">
+      	<video autoplay muted loop playsinline> <source src="/images/Full/LaurenFryMackie_SquirrelonAcorn_Video.mp4" type="video/mp4" alt="Squirrel on Acorn"></video>
 		   <div class="announcement-img-overlay">
 			   <div>
 				   <div class="announcement-img-title">Squirrel on Acorn</div>
@@ -1519,7 +1565,6 @@
 			   </div>
      	   </div>
 	  </div>
-	</div>
 </section>	
 
 
@@ -1876,7 +1921,128 @@ reveals.forEach(el => observer.observe(el));
   }
   animRing();
 
-    //Gallery Preview
+  // Disable right-click on images
+  document.addEventListener('contextmenu', e => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+  });  
+
+
+	
+// ANNOUNCEMENT LIGHTBOX
+const announcement = document.querySelector('.announcement');
+
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightboxImg');
+const lbVideo = document.getElementById('lightboxVideo');
+
+const lbTitle = document.getElementById('lightboxTitle');
+const lbMedium = document.getElementById('lightboxMedium');
+const lbDesc = document.getElementById('lightboxDesc');
+
+const closeBtn = document.getElementById('lightboxClose');
+const prevBtn = document.getElementById('lightboxPrev');
+const nextBtn = document.getElementById('lightboxNext');
+
+let currentItems = [];
+let currentIndex = 0;
+	
+	// OPEN LIGHTBOX
+	function openLightbox(items, index) {
+	    currentItems = items;
+	    currentIndex = index;
+	
+	    showSlide(currentIndex);
+	
+	    lightbox.classList.add('open');
+	    document.body.style.overflow = 'hidden';
+	}
+	// DISPLAY CURRENT ITEM
+	function showSlide(i) {
+	    const item = currentItems[i];
+	    lbTitle.textContent = item.dataset.title || '';
+	    lbMedium.textContent = item.dataset.medium || '';
+	    lbDesc.textContent = item.dataset.desc || '';
+	    // VIDEO
+	    if (item.dataset.type === 'video') {
+	        lbImg.style.display = 'none';
+	        lbVideo.style.display = 'block';
+	        lbVideo.src = item.dataset.src;
+	        lbVideo.load();
+	        lbVideo.play().catch(() => {});
+	    }
+	    // IMAGE
+		    else {
+		        lbVideo.pause();
+		        lbVideo.removeAttribute('src');
+		        lbVideo.load();
+		        lbVideo.style.display = 'none';
+		
+		        lbImg.src = item.dataset.src;
+		        lbImg.alt = item.dataset.title || '';
+		        lbImg.style.display = 'block';
+		    }
+	}
+	// CLOSE LIGHTBOX
+	function closeLightbox() {
+	    lightbox.classList.remove('open');
+	    document.body.style.overflow = '';
+	
+	    lbVideo.pause();
+	    lbVideo.removeAttribute('src');
+	    lbVideo.load();
+	}
+// FIND ANNOUNCEMENT IMAGES
+const announcementItems = Array.from(
+    announcement.querySelectorAll('.announcement-img')
+);
+// CLICK TO OPEN
+announcementItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+        openLightbox(announcementItems, index);
+    });
+});
+// CLOSE BUTTON
+closeBtn.addEventListener('click', closeLightbox);
+// PREVIOUS BUTTON
+prevBtn.addEventListener('click', () => {
+    currentIndex =
+        (currentIndex - 1 + currentItems.length) % currentItems.length;
+    showSlide(currentIndex);
+});
+// NEXT BUTTON
+nextBtn.addEventListener('click', () => {
+    currentIndex =
+        (currentIndex + 1) % currentItems.length;
+    showSlide(currentIndex);
+});
+// CLICK OUTSIDE TO CLOSE
+lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) {
+        closeLightbox();
+    }
+});
+// KEYBOARD CONTROLS
+document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+    if (e.key === 'ArrowLeft') {
+        currentIndex =
+            (currentIndex - 1 + currentItems.length) % currentItems.length;
+        showSlide(currentIndex);
+    }
+    if (e.key === 'ArrowRight') {
+        currentIndex =
+            (currentIndex + 1) % currentItems.length;
+        showSlide(currentIndex);
+    }
+});
+
+	
+	
+	
+//Gallery Preview
   const track = document.getElementById("galleryTrack");
 const prev = document.querySelector(".gallery-btn.prev");
 const next = document.querySelector(".gallery-btn.next");
